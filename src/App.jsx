@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useEffect } from 'react'
 import './App.css'
 
@@ -6,14 +6,20 @@ import db from './firebase/firebaseConfig';
 import { collection, getDocs } from "firebase/firestore";
 
 function App() {
-  const fetchData = async () => {
-    const querySnapshot = await getDocs(collection(db, "restaurant"));
-    querySnapshot.forEach((doc) => {
-      console.log(doc.data().reviews[0]);
-    });
-  };
+  const [reviews, setReviews] = useState([])
 
-  fetchData();
+  useEffect(() => {
+    const fetchData = async () => {
+      const querySnapshot = await getDocs(collection(db, "restaurant"));
+      querySnapshot.forEach((doc) => {
+        setReviews(doc.data().reviews);
+      });
+    };
+
+    fetchData();
+  }, []);
+
+  console.log(reviews[0], reviews[1]);
 
 
   return(
