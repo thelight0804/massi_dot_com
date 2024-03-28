@@ -289,4 +289,14 @@ xcuserdata/
 *.xcscmblueprint
 *.xccheckout
 
+### Firebase ###
+.idea
+**/node_modules/*
+**/.firebaserc
+
+### Firebase Patch ###
+.runtimeconfig.json
+.firebase/
+
+### Env Variables ###
 .env
