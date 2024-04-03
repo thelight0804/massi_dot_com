@@ -1,32 +1,14 @@
-import React, { useState } from 'react'
-import { useEffect } from 'react'
-import './App.css'
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import './App.css';
+import AppRouter from '@/routers/AppRouter';
 
-import db from './firebase/firebaseConfig';
-import { collection, getDocs } from "firebase/firestore";
-
-function App() {
-  const [reviews, setReviews] = useState([])
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const querySnapshot = await getDocs(collection(db, "restaurant"));
-      querySnapshot.forEach((doc) => {
-        setReviews(doc.data().reviews);
-      });
-    };
-
-    fetchData();
-  }, []);
-
-  console.log(reviews[0], reviews[1]);
-
-
-  return(
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-  )
-}
-
-export default App
+const App = createRoot(document.getElementById('root'));
+App.render(
+  <StrictMode>
+    <BrowserRouter>
+      <AppRouter />
+    </BrowserRouter>
+  </StrictMode>
+);
