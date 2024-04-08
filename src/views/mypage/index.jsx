@@ -2,12 +2,12 @@ import React from 'react';
 import Navigation from '@/components/common/Navigation';
 
 
-const Restaurant = () => {
+const MyPage = () => {
   return (
     <div>
       <Navigation />
-      <h1>Restaurant Page</h1>
+      <h1>MyPage Page</h1>
     </div>
   )
 };
-export default Restaurant;
+export default MyPage;
