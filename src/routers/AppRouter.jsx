@@ -7,6 +7,7 @@ const AppRouter = () => {
   return (
     <Routes>
       <Route path={ROUTES.HOME} element={<view.Home />} />
+      <Route path={ROUTES.Restaurant} element={<view.Restaurant />} />
     </Routes>
   );
 }
