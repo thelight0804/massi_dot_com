@@ -18,8 +18,7 @@ const Home = () => {
         {(errorRestaurants && !isLoadingRestaurants) ? (
           console.log(errorRestaurants) // 에러 메시지 출력
         ) : (
-          // <RestaurantGrid restaurants={restaurants} />
-          console.log(restaurants)
+          <RestaurantGrid restaurants={restaurants} />
         )}
       </div>
 

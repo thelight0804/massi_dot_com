@@ -1,9 +1,15 @@
 import React from "react";
+import RestaurantItem from "./RestaurantItem";
 
-const RestaurantGrid = () => {
+const RestaurantGrid = ({restaurants}) => {
   return (
     <div>
-      <h1>RestaurantGrid</h1>
+      {restaurants.map((restaurant) => (
+        <RestaurantItem
+          key={restaurant.id}
+          restaurant={restaurant}
+        />
+      ))}
     </div>
   );
 };
