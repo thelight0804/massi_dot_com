@@ -5,14 +5,14 @@ import * as ROUTE from "@/constants/routes";
 const Navigation = () => {
 
   return (
-    <nav class="flex items-center p-3 font-do-hyeon justify-between">
+    <nav class="flex items-center p-3 font-do-hyeon justify-between border-b-2 border-stone-300">
       <div class="flex items-center space-x-4">
         <div class="text-xl">
           <Link to="/">맛있닷컴</Link>
         </div>
         <ul class="flex space-x-4">
-          <li><NavLink to={ROUTE.Restaurant}>가게</NavLink></li>
-          <li><NavLink to={ROUTE.Review}>리뷰</NavLink></li>
+          <li><NavLink to={ROUTE.Review}>메뉴</NavLink></li>
+          <li><NavLink to={ROUTE.Restaurant}>정보ㆍ원산지</NavLink></li>
         </ul>
       </div>
       <ul class="bg">

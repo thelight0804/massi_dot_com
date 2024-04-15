@@ -6,7 +6,6 @@ const Review = () => {
   return (
     <div>
       <Navigation />
-      <h1>Review Page</h1>
     </div>
   )
 };
