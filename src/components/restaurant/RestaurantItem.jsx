@@ -8,22 +8,24 @@ const RestaurantItem = ({restaurant}) => {
   const navigate = useNavigate();
 
   const onClickRestaurant = () => {
-    navigate(ROUTE.ViewRestaurant.replace(':id', restaurant.id), {state: {restaurant}})
+    navigate(ROUTE.ViewRestaurant.replace(":id", restaurant.id), {
+      state: { restaurant },
+    });
   };
 
   return (
-    <button 
-      className="flex items-center border-b-2 border-stone-100 py-4 w-full hover:bg-amber-100"
+    <button
+      className="flex w-full items-center border-b-2 border-stone-100 py-4 hover:bg-amber-100"
       onClick={onClickRestaurant}
     >
-      <div className="h-50 w-auto m-5">
-        <img src={restaurant.image} alt="restaurant"/>
+      <div className="h-50 m-5 w-auto">
+        <img src={restaurant.image} alt="restaurant" />
       </div>
       <div>
-        <h1 className="font-bold text-lg">{restaurant.name}</h1>
+        <h1 className="text-lg font-bold">{restaurant.name}</h1>
         <div className="flex items-center">
-          <IconContext.Provider value={{color: "orange"}}>
-            <FaStar/>
+          <IconContext.Provider value={{ color: "orange" }}>
+            <FaStar />
             <p className="font-bold">{restaurant.avgRating}</p>
           </IconContext.Provider>
         </div>
