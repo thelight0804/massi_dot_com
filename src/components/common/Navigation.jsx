@@ -15,7 +15,7 @@ const Navigation = () => {
         </div>
         <ul class="flex space-x-4">
           <li><NavLink to={ROUTE.Review}>메뉴</NavLink></li>
-          <li><NavLink to={ROUTE.Restaurant}>정보ㆍ원산지</NavLink></li>
+          <li><NavLink to={ROUTE.Restaurant}>정보ㆍ원산지 dfdf</NavLink></li>
         </ul>
       </div>
       <ul class="bg">
