@@ -15,12 +15,10 @@ const RestaurantItem = ({restaurant}) => {
 
   return (
     <button
-      className="flex w-full items-center border-b-2 border-stone-100 py-4 hover:bg-amber-100"
+      className="flex w-full items-center border-b-2 border-stone-100 hover:bg-red-100 md:border-2 md:m-5 md:w-1/3"
       onClick={onClickRestaurant}
     >
-      <div className="h-50 m-5 w-auto">
-        <img src={restaurant.image} alt="restaurant" />
-      </div>
+      <img className="h-28 w-28 m-4 rounded-md" src={restaurant.image} alt="restaurant" />
       <div>
         <h1 className="text-lg font-bold">{restaurant.name}</h1>
         <div className="flex items-center">
