@@ -11,6 +11,7 @@ const AppRouter = () => {
       <Route path={ROUTES.Review} element={<view.Review />} />
       <Route path={ROUTES.MyPage} element={<view.MyPage />} />
       <Route path={ROUTES.RegisterRestaurant} element={<view.RegisterRestaurant />} />
+      <Route path={ROUTES.RegisterMenu} element={<view.RegisterMenu />} />
     </Routes>
   );
 }

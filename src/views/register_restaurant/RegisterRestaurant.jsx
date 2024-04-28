@@ -1,12 +1,18 @@
 import React from 'react';
 import Navigation from '@/components/common/Navigation';
+import ProgressIndicator from '@/components/common/ProgressIndicator';
+import { useNavigate } from "react-router-dom";
+import * as ROUTE from "@/constants/routes";
 import { Field, Form, Formik } from 'formik';
 
 const RegisterRestaurant = () => {
+  var navigate = useNavigate(); // react-router에서 사용하는 hook
+
   return (
     <div>
       <Navigation />
-      <div className="mx-auto mt-10 w-80 border p-4">
+      <ProgressIndicator currentPage="restaurant" />
+      <div className="mx-auto m-4 w-1/2 border p-4">
         <h3 className="my-4 text-center text-xl font-bold">식당 등록</h3>
         <Formik
           initialValues={{
@@ -21,7 +27,9 @@ const RegisterRestaurant = () => {
             image: "", // 간판 이미지
           }}
           onSubmit={(values) => {
-            alert(JSON.stringify(values, null, 2));
+            var restaurantInfo = JSON.stringify(values, null, 2)
+            // RegisterMenu 페이지로 이동
+            navigate(ROUTE.RegisterMenu, { state: { restaurantInfo: restaurantInfo } });
           }}
         >
           {() => (
