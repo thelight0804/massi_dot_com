@@ -20,14 +20,14 @@ const RestaurantItem = ({restaurant}) => {
     >
       <img className="h-28 w-28 m-4 rounded-md" src={restaurant.image} alt="restaurant" />
       <div>
-        <h1 className="text-lg font-bold">{restaurant.name}</h1>
+        <h1 className="text-lg font-bold text-left">{restaurant.name}</h1>
         <div className="flex items-center">
           <IconContext.Provider value={{ color: "orange" }}>
             <FaStar />
             <p className="font-bold">{restaurant.avgRating}</p>
           </IconContext.Provider>
         </div>
-        <p>{restaurant.info.phoneNumber}</p>
+        <p className="text-left">{restaurant.info.phoneNumber}</p>
         <div>
           <span className="text-stone-500">대표 메뉴</span>
           <span>&nbsp;{restaurant.mainMenu}</span>
