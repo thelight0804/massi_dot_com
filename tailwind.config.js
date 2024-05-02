@@ -10,6 +10,7 @@ export default {
         "noto-sans-kr": ["Noto Sans KR", "sans-serif"],
         "jua": ["Jua", "sans-serif"],
         "do-hyeon": ["Do Hyeon", "sans-serif"],
+        "Nanum-Brush-Script": ["Nanum Brush Script", "sans-serif"],
       }
     },
   },
