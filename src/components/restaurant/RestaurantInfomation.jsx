@@ -25,7 +25,7 @@ const RestaurantInfomation = ({ name, info }) => {
             </tr>
             <tr>
               <td className="px-5 py-2 text-gray-700 font-bold">전화번호</td>
-              <td className="px-5 py-5 text-gray-700">{info.phoneNumber}</td>
+              <td className="px-5 py-5 text-gray-700 underline underline-offset-1">{info.phoneNumber}</td>
             </tr>
           </tbody>
         </table>
