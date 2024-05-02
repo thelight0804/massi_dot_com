@@ -40,10 +40,11 @@ const RegisterRestaurant = () => {
                 </label>
                 <Field
                   name="name"
-                  type="text"
-                  label="식당 이름"
-                  placeholder="맛있는 식당"
+                  type="text" // input 태그의 type 속성
+                  label="식당 이름" // input 태그의 label 속성
+                  placeholder="맛있는 식당" // 힌트
                   className="w-full border py-2 text-center"
+                  required // 필수 입력 여부
                 />
               </div>
               <div className="text-center">
@@ -56,6 +57,7 @@ const RegisterRestaurant = () => {
                   label="주소"
                   placeholder="서울시 강남구"
                   className="w-full border py-2 text-center"
+                  required
                 />
               </div>
               <div className="text-center">
@@ -67,6 +69,7 @@ const RegisterRestaurant = () => {
                     name="info.openTime"
                     as="select"
                     className="w-full border py-2 text-center"
+                    required
                   >
                     {[...Array(24).keys()].map((hour) => {
                       return (
@@ -81,6 +84,7 @@ const RegisterRestaurant = () => {
                     name="info.closeTime"
                     as="select"
                     className="w-full border py-2 text-center"
+                    required
                   >
                     {[...Array(24).keys()].map((hour) => {
                       return (
@@ -98,10 +102,12 @@ const RegisterRestaurant = () => {
                 </label>
                 <Field
                   name="info.phoneNumber"
-                  type="text"
+                  type="tel"
                   label="전화번호"
                   placeholder="010-1234-5678"
                   className="w-full border py-2 text-center"
+                  pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" // 전화번호 형식
+                  required
                 />
               </div>
               <div className="text-center">
@@ -112,6 +118,7 @@ const RegisterRestaurant = () => {
                   name="info.closedDay"
                   as="select"
                   className="w-full border py-2 text-center"
+                  required
                 >
                   {[
                     "월요일",
@@ -139,6 +146,7 @@ const RegisterRestaurant = () => {
                   type="file"
                   label="간판 이미지"
                   className="w-full border py-2 text-center"
+                  required
                 />
               </div>
               <button
