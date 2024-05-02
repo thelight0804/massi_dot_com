@@ -119,6 +119,6 @@ function Review() {
       <Tab />
 
     </div>
-  );
-}
+  )
+};
 export default Review;
