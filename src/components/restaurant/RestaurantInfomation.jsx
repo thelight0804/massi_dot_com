@@ -15,13 +15,7 @@ const RestaurantInfomation = ({ name, info }) => {
               <td className="px-5 py-2 text-gray-700 font-bold">운영시간</td>
               <td className="px-5 py-2 text-gray-700">
                 <div className="space-y-1"> {/* space-y-1: 요소 사이 간격 1 */}
-                  <p><strong>월요일</strong> <span>{info.openTime}</span></p>
-                  <p><strong>화요일</strong> <span>{info.openTime}</span></p>
-                  <p><strong>수요일</strong> <span>{info.openTime}</span></p>
-                  <p><strong>목요일</strong> <span>{info.openTime}</span></p>
-                  <p><strong>금요일</strong> <span>{info.openTime}</span></p>
-                  <p><strong>토요일</strong> <span>{info.openTime}</span></p>
-                  <p><strong>일요일</strong> <span>{info.openTime}</span></p>
+                  <p><span>{info.openTime} ~ {info.closeTime}</span></p>
                 </div>
               </td>
             </tr>
