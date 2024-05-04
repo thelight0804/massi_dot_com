@@ -28,7 +28,7 @@ const RegisterMenu = () => {
       <div className="mx-auto m-4 w-1/2 border p-4">
         <h3 className="my-4 text-center text-xl font-bold">메뉴 등록</h3>
         <Formik
-          initialValues={{ menu: '', price: 0, image:'' }}
+          initialValues={{ menu: '', price: 0, menuImage:'', }}
           onSubmit={(values, {resetForm}) => {
             setMenuItems([...menuItems, values]); // 메뉴 추가
             alert('메뉴가 추가되었습니다.');
@@ -69,7 +69,7 @@ const RegisterMenu = () => {
                   메뉴 이미지
                 </label>
                 <Field
-                  name="image"
+                  name="menuImage"
                   type="file"
                   label="메뉴 이미지"
                   className="w-full border py-2 text-center"
