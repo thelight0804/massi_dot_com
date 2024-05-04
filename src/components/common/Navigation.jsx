@@ -19,8 +19,10 @@ const Navigation = () => {
         </ul>
       </div>
       <ul className="flex items-center gap-5">
-        <li className="rounded-md bg-red-500 px-4 py-2 text-white">
-          <NavLink to={ROUTE.RegisterRestaurant}>식당 등록</NavLink>
+        <li >
+          <NavLink
+            className="rounded-md bg-red-500 px-4 py-4 text-white" 
+            to={ROUTE.RegisterRestaurant}>식당 등록</NavLink>
         </li>
         <li>
           <NavLink to={ROUTE.MyPage}>마이 페이지</NavLink>
