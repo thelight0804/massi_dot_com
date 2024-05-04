@@ -3,7 +3,7 @@ import Navigation from '@/components/common/Navigation';
 import { Field, Form, Formik, useFormikContext } from 'formik';
 import { useNavigate, useLocation } from "react-router-dom";
 import ProgressIndicator from '@/components/common/ProgressIndicator';
-import useRestaurant from '@/hooks/useRestaurant';
+import { useRestaurant } from '@/hooks';
 
 const RegisterMenu = () => {
   var navigate = useNavigate();
