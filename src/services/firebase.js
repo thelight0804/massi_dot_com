@@ -1,7 +1,7 @@
 import firebaseConfig from "./config"; // Firebase 설정 가져오기
 import { initializeApp } from "firebase/app";
 import { collection, getDocs, getFirestore, query, limit, addDoc, updateDoc, doc } from "firebase/firestore"; // Firestore 데이터 받아오기
-import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 
 class Firebase {
   constructor() {
@@ -35,25 +35,25 @@ class Firebase {
     return restaurants; // 식당 데이터 배열 반환
   }
 
+  /**
+   * Firestore에 식당 데이터를 추가하는 함수
+   * @param {Object} value 식당 데이터
+   * @returns {String} docRef.id 등록된 식당 ID
+   */
   addRestaurant = async (value) => {
     try {
+      // 메뉴 데이터에 이미지 제거
+      var menu = value.menu.map(item => ({ ...item, image: null }));
+
       // Firestore에 식당 데이터 추가
-      const docRef = await addDoc(collection(this.db, "restaurant"), value); // Firestore에 데이터 추가
+      const docRef = await addDoc(collection(this.db, "restaurant"), {
+        name: value.name,
+        info: value.info,
+        mainMenu: value.mainMenu,
+        image: null, // 이미지 URL은 null로 초기화
+        menu: menu, // 이미지를 제거한 메뉴 데이터 추가
+      });
       console.log("Document written with ID: ", docRef.id); // 등록된 식당 ID 출력
-
-      // 식당 대표 이미지 저장
-      // const snapshot = await this.storeImage(value.image, `restaurants/${docRef.id}/image.jpg`);
-      // console.log('snapshot: ', snapshot)
-      // const imageUrl = this.getFileURL(`restaurants/${docRef.id}/image.jpg`);
-      // console.log('imageUrl: ', imageUrl)
-
-      // 식당 이미지 경로 업데이트
-      // const washingtonRef = doc(this.db, "restaurant", docRef.id);
-      // console.log('imageUrl: ', imageUrl)
-      // await updateDoc(washingtonRef, {
-      //   image: imageUrl,
-      // });
-
       return docRef.id; // 등록된 식당 ID 반환
     } catch (e) {
       console.error('Firebase.setRestaurant: ', e);
@@ -61,37 +61,68 @@ class Firebase {
     }
   }
 
+  /**
+   * Firestore에 식당 대표 이미지 URL을 업데이트하는 함수
+   * @param {String} id 식당 ID
+   * @param {String} imageUrl 이미지 URL
+   */
+  updateRestaurantMainImage = async (id, imageUrl) => {
+    try {
+      const washingtonRef = doc(this.db, "restaurant", id);
+      await updateDoc(washingtonRef, {
+        image: imageUrl,
+      });
+    } catch (e) {
+      console.error('Firebase.updateRestaurantMainImage: ', e);
+      alert("간판 이미지 업로드에 실패했습니다.\n다시 시도해주세요.");
+    }
+  }
+
+  /**
+   * Firestore에 식당 메뉴 이미지들을 업데이트하는 함수
+   * @param {String} id 식당 ID
+   * @param {Array} value 메뉴 데이터 배열
+   */
+  updateRestaurantMenuImage = async (id, value) => {
+    try {
+      const washingtonRef = doc(this.db, "restaurant", id);
+      await updateDoc(washingtonRef, {
+        menu: [...value],
+      });
+    } catch (e) {
+      console.error('Firebase.updateRestaurantMenuImage: ', e);
+      alert("메뉴 이미지 업로드에 실패했습니다.\n다시 시도해주세요.");
+    }
+  }
+
+
+
   // Storage Funtions --------------
+
+  /**
+   * 파일을 Storage에 업로드하는 함수
+   * @param {File} file 파일 객체
+   * @param {String} path 파일 저장 경로
+   * @returns {String} 파일 경로 URL
+   */
   storeImage = async (file, path) => {
+    // 임의의 파일명 생성
+    const filename = 'file_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+
     // storage reference 생성
-    const storageRef = ref(this.storage, path);
+    const storageRef = ref(this.storage, path + filename);
+
     try {
       // 파일 업로드
-      return uploadBytes(storageRef, file).then((snapshot) => {
-        console.log("Uploaded a blob or file: ", snapshot);
-        return snapshot;
+      return uploadBytesResumable(storageRef, file).then((snapshot) => {
+        console.log("Uploaded a blob or file: ", storageRef);
+        return getDownloadURL(storageRef);
       })
     } catch (e) {
       console.error('Firebase.storeImage: ', e);
       alert("이미지 업로드에 실패했습니다.\n다시 시도해주세요.");
     }
   }
-
-  getFileURL = (path) => {
-    // storage reference 생성
-    const storageRef = ref(this.storage, path);
-    try {
-      // 파일 다운로드 URL 반환
-      getDownloadURL(storageRef)
-        .then((url) => {
-          return url;
-        })
-    } catch (e) {
-      console.error('Firebase.getFileURL: ', e);
-      alert("이미지 다운로드에 실패했습니다.\n다시 시도해주세요.");
-    }
-  }
-
 }
 
 
