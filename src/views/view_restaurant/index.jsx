@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import Navigation from '@/components/common/Navigation';
 import RestaurantInfomation from '@/components/restaurant/RestaurantInfomation';
+import RestaurantReviews from '@/components/restaurant/RestaurantReviews';
 import { useLocation } from 'react-router-dom';
 
 const ViewRestaurant = () => {
@@ -97,7 +98,7 @@ const ViewRestaurant = () => {
         </li>
       ),
       tabCont: (
-        <div>음식 리뷰</div>
+        <RestaurantReviews name={restaurant.name} reviews={restaurant.reviews} />
       )
     }
   ];
