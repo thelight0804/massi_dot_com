@@ -32,145 +32,150 @@ const RegisterRestaurant = () => {
           }}
         >
           {({setFieldValue}) => (
-            <Form>
-              <div className="text-center">
-                <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="name">
-                  식당 이름
-                </label>
-                <Field
-                  name="name"
-                  type="text" // input 태그의 type 속성
-                  label="식당 이름" // input 태그의 label 속성
-                  placeholder="맛있는 식당" // 힌트
-                  className="w-full border py-2 text-center"
-                  required // 필수 입력 여부
-                />
-              </div>
-              <div className="text-center">
-                <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="mainMenu">
-                  대표 메뉴
-                </label>
-                <Field
-                  name="mainMenu"
-                  type="text"
-                  label="대표 메뉴"
-                  placeholder="김치찌개"
-                  className="w-full border py-2 text-center"
-                  required
-                />
-              </div>
-              <div className="text-center">
-                <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="address">
-                  주소
-                </label>
-                <Field
-                  name="info.address"
-                  type="text"
-                  label="주소"
-                  placeholder="서울시 강남구"
-                  className="w-full border py-2 text-center"
-                  required
-                />
-              </div>
-              <div className="text-center">
-                <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="openTime">
-                  오픈 시간
-                </label>
-                <div className="flex items-center justify-center">
+            <Form className="md:flex justify-evenly">
+              <div>
+                <div className="text-center">
+                  <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="name">
+                    식당 이름
+                  </label>
                   <Field
-                    name="info.openTime"
+                    name="name"
+                    type="text" // input 태그의 type 속성
+                    label="식당 이름" // input 태그의 label 속성
+                    placeholder="맛있는 식당" // 힌트
+                    className="w-full border py-2 text-center"
+                    required // 필수 입력 여부
+                  />
+                </div>
+                <div className="text-center">
+                  <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="mainMenu">
+                    대표 메뉴
+                  </label>
+                  <Field
+                    name="mainMenu"
+                    type="text"
+                    label="대표 메뉴"
+                    placeholder="김치찌개"
+                    className="w-full border py-2 text-center"
+                    required
+                  />
+                </div>
+                <div className="text-center">
+                  <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="address">
+                    주소
+                  </label>
+                  <Field
+                    name="info.address"
+                    type="text"
+                    label="주소"
+                    placeholder="서울시 강남구"
+                    className="w-full border py-2 text-center"
+                    required
+                  />
+                </div>
+                <div className="text-center">
+                  <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="openTime">
+                    오픈 시간
+                  </label>
+                  <div className="flex items-center justify-center">
+                    <Field
+                      name="info.openTime"
+                      as="select"
+                      className="w-full border py-2 text-center"
+                      required
+                    >
+                      {[...Array(24).keys()].map((hour) => {
+                        return (
+                          <option key={hour} value={hour + ":00"}>
+                            {hour}:00
+                          </option>
+                        );
+                      })}
+                    </Field>
+                    <p className="mx-2">~</p>
+                    <Field
+                      name="info.closeTime"
+                      as="select"
+                      className="w-full border py-2 text-center"
+                      required
+                    >
+                      {[...Array(24).keys()].map((hour) => {
+                        return (
+                          <option key={hour} value={hour + ":00"}>
+                            {hour}:00
+                          </option>
+                        );
+                      })}
+                    </Field>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-gray-100 w-0.5 mx-2" />
+              <div>
+                <div className="text-center">
+                  <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="phoneNumber">
+                    전화번호
+                  </label>
+                  <Field
+                    name="info.phoneNumber"
+                    type="tel"
+                    label="전화번호"
+                    placeholder="010-1234-5678"
+                    className="w-full border py-2 text-center"
+                    pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" // 전화번호 형식 //FIX: 첫 3자리는 2자리도 허용해야 함
+                    required
+                  />
+                </div>
+                <div className="text-center">
+                  <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="closedDay">
+                    휴무일
+                  </label>
+                  <Field
+                    name="info.closedDay"
                     as="select"
                     className="w-full border py-2 text-center"
                     required
                   >
-                    {[...Array(24).keys()].map((hour) => {
+                    {[
+                      "월요일",
+                      "화요일",
+                      "수요일",
+                      "목요일",
+                      "금요일",
+                      "토요일",
+                      "일요일",
+                    ].map((day) => {
                       return (
-                        <option key={hour} value={hour + ":00"}>
-                          {hour}:00
-                        </option>
-                      );
-                    })}
-                  </Field>
-                  <p className="mx-2">~</p>
-                  <Field
-                    name="info.closeTime"
-                    as="select"
-                    className="w-full border py-2 text-center"
-                    required
-                  >
-                    {[...Array(24).keys()].map((hour) => {
-                      return (
-                        <option key={hour} value={hour + ":00"}>
-                          {hour}:00
+                        <option key={day} value={day}>
+                          {day}
                         </option>
                       );
                     })}
                   </Field>
                 </div>
-              </div>
-              <div className="text-center">
-                <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="phoneNumber">
-                  전화번호
-                </label>
-                <Field
-                  name="info.phoneNumber"
-                  type="tel"
-                  label="전화번호"
-                  placeholder="010-1234-5678"
-                  className="w-full border py-2 text-center"
-                  pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" // 전화번호 형식 //FIX: 첫 3자리는 2자리도 허용해야 함
-                  required
-                />
-              </div>
-              <div className="text-center">
-                <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="closedDay">
-                  휴무일
-                </label>
-                <Field
-                  name="info.closedDay"
-                  as="select"
-                  className="w-full border py-2 text-center"
-                  required
+                <div className="text-center">
+                  <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="image">
+                    간판 이미지
+                  </label>
+                  <input
+                    id="image"
+                    name="image"
+                    type="file"
+                    label="간판 이미지"
+                    className="w-full border py-2 text-center"
+                    required
+                    onChange={(event) => {
+                      setFieldValue('image', event.currentTarget.files[0]);
+                    }}
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="mt-4 w-full rounded bg-red-300 px-4 py-2 font-bold text-white hover:bg-red-500"
                 >
-                  {[
-                    "월요일",
-                    "화요일",
-                    "수요일",
-                    "목요일",
-                    "금요일",
-                    "토요일",
-                    "일요일",
-                  ].map((day) => {
-                    return (
-                      <option key={day} value={day}>
-                        {day}
-                      </option>
-                    );
-                  })}
-                </Field>
+                  다음
+                </button>
               </div>
-              <div className="text-center">
-                <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="image">
-                  간판 이미지
-                </label>
-                <input
-                  id="image"
-                  name="image"
-                  type="file"
-                  label="간판 이미지"
-                  className="w-full border py-2 text-center"
-                  required
-                  onChange={(event) => {
-                    setFieldValue('image', event.currentTarget.files[0]);
-                  }}
-                />
-              </div>
-              <button
-                type="submit"
-                className="mt-4 w-full rounded bg-red-300 px-4 py-2 font-bold text-white hover:bg-red-500"
-              >
-                다음
-              </button>
             </Form>
           )}
         </Formik>

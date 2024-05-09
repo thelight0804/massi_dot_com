@@ -40,73 +40,78 @@ const RegisterMenu = () => {
           }}
         >
           {({setFieldValue}) => (
-            <Form>
-              <div className="text-center">
-                <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="name">
-                  메뉴 이름
-                </label>
-                <Field
-                  name="name"
-                  type="text"
-                  label="메뉴 이름"
-                  placeholder="음식명"
-                  required
-                  className="w-full border py-2 text-center"
-                />
-              </div>
-              <div className="text-center">
-                <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="address">
-                  가격
-                </label>
-                <Field
-                  name="price"
-                  type="number"
-                  label="가격"
-                  placeholder="5000"
-                  min={1} // 최소값
-                  required
-                  className="w-full border py-2 text-center"
-                />
-              </div>
-              <div className="text-center">
-                <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="image">
-                  메뉴 이미지
-                </label>
-                <input
-                  id="image"
-                  name="image"
-                  type="file"
-                  label="메뉴 이미지"
-                  className="w-full border py-2 text-center"
-                  required
-                  onChange={(event) => {
-                    setFieldValue('image', event.currentTarget.files[0]);
-                  }}
-                />
-              </div>
-              <button
-                type="submit"
-                className="mt-4 w-full rounded bg-orange-300 px-4 py-2 font-bold text-white hover:bg-orange-500"
-              >
-                메뉴 추가
-              </button>
-              <div className='flex space-x-4'>
+            <Form className="md:flex justify-evenly">
+              <div>
+                <div className="text-center">
+                  <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="name">
+                    메뉴 이름
+                  </label>
+                  <Field
+                    name="name"
+                    type="text"
+                    label="메뉴 이름"
+                    placeholder="음식명"
+                    required
+                    className="w-full border py-2 text-center"
+                  />
+                </div>
+                <div className="text-center">
+                  <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="address">
+                    가격
+                  </label>
+                  <Field
+                    name="price"
+                    type="number"
+                    label="가격"
+                    placeholder="5000"
+                    min={1} // 최소값
+                    required
+                    className="w-full border py-2 text-center"
+                  />
+                </div>
+                <div className="text-center">
+                  <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="image">
+                    메뉴 이미지
+                  </label>
+                  <input
+                    id="image"
+                    name="image"
+                    type="file"
+                    label="메뉴 이미지"
+                    className="w-full border py-2 text-center"
+                    required
+                    onChange={(event) => {
+                      setFieldValue('image', event.currentTarget.files[0]);
+                    }}
+                  />
+                </div>
                 <button
-                  type="button"
-                  className="mt-4 w-full rounded bg-gray-300 px-4 py-2 font-bold text-white hover:bg-gray-500"
-                  onClick={() => {
-                    navigate(-1); // 이전 페이지로 이동
-                  }}
+                  type="submit"
+                  className="mt-4 w-full rounded bg-orange-300 px-4 py-2 font-bold text-white hover:bg-orange-500"
                 >
-                  이전
+                  메뉴 추가
                 </button>
-                <button
-                  type="button"
-                  className="mt-4 w-full rounded bg-red-300 px-4 py-2 font-bold text-white hover:bg-red-500"
-                  onClick={() => handleAddRestarant(menuItems)}
-                >
-                  등록
-                </button>
+              </div>
+              <div className="bg-gray-100 w-0.5 mx-2" />
+              <div>
+                <div className='flex space-x-4 md:block md:space-x-0'>
+                  <button
+                    type="button"
+                    className="mt-4 w-full rounded bg-gray-300 px-4 py-2 font-bold text-white hover:bg-gray-500"
+                    onClick={() => {
+                      navigate(-1); // 이전 페이지로 이동
+                    }}
+                  >
+                    이전
+                  </button>
+                  <button
+                    type="button"
+                    className="mt-4 w-full rounded bg-red-300 px-4 py-2 font-bold text-white hover:bg-red-500"
+                    onClick={() => handleAddRestarant(menuItems)}
+                  >
+                    등록
+                  </button>
+                </div>
               </div>
             </Form>
           )}
