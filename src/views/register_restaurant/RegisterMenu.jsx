@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Navigation from '@/components/common/Navigation';
-import { Field, Form, Formik, useFormikContext } from 'formik';
+import { Field, Form, Formik } from 'formik';
 import { useNavigate, useLocation } from "react-router-dom";
 import ProgressIndicator from '@/components/common/ProgressIndicator';
 import { useRestaurant } from '@/hooks';
@@ -18,7 +18,11 @@ const RegisterMenu = () => {
    * @param {Array} menuItems 추가된 메뉴 리스트
    */
   const handleAddRestarant = (menuItems) => {
-    addToRestaurant(restaurantInfo, menuItems); // 식당 등록
+    // 메뉴가 추가되지 않았을 때 확인 메시지
+    if (menuItems.length === 0 && !window.confirm('메뉴가 추가되지 않았습니다. 그래도 등록하시겠습니까?')) {
+      return;
+    }
+    addToRestaurant(restaurantInfo, menuItems); // 식당 등록 함수 호출
   };
 
   return (
@@ -28,21 +32,21 @@ const RegisterMenu = () => {
       <div className="mx-auto m-4 w-1/2 border p-4">
         <h3 className="my-4 text-center text-xl font-bold">메뉴 등록</h3>
         <Formik
-          initialValues={{ menu: '', price: 0, menuImage:'', }}
+          initialValues={{ name: '', price: 0 }}
           onSubmit={(values, {resetForm}) => {
             setMenuItems([...menuItems, values]); // 메뉴 추가
             alert('메뉴가 추가되었습니다.');
             resetForm(); // Form 초기화
           }}
         >
-          {() => (
+          {({setFieldValue}) => (
             <Form>
               <div className="text-center">
                 <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="name">
                   메뉴 이름
                 </label>
                 <Field
-                  name="menu"
+                  name="name"
                   type="text"
                   label="메뉴 이름"
                   placeholder="음식명"
@@ -68,11 +72,16 @@ const RegisterMenu = () => {
                 <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="image">
                   메뉴 이미지
                 </label>
-                <Field
-                  name="menuImage"
+                <input
+                  id="image"
+                  name="image"
                   type="file"
                   label="메뉴 이미지"
                   className="w-full border py-2 text-center"
+                  required
+                  onChange={(event) => {
+                    setFieldValue('image', event.currentTarget.files[0]);
+                  }}
                 />
               </div>
               <button
