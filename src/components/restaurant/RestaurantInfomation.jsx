@@ -4,7 +4,7 @@ const RestaurantInfomation = ({ name, info }) => {
   return (
     <div className="bg-white shadow-md space-y-10"> {/* bg-white: 배경색, shadow-md: 그림자 */}
       <div className="bg-white shadow-md">
-        <h2 className="px-4 text-2xl font-bold mb-2">{name}</h2> {/* px-4: padding, text-2xl: 글자 크기, font-bold: 글자 굵기 */}
+        <h2 className="px-4 text-2xl font-bold mb-2 pt-2">{name}</h2> {/* px-4: padding, text-2xl: 글자 크기, font-bold: 글자 굵기 */}
         <table className="table-auto w-auto"> {/* table-auto: 테이블 크기 자동 조정, w-auto: 너비 자동 조정 */}
           <tbody>
             <tr>

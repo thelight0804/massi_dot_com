@@ -30,7 +30,7 @@ function Tab() {
                   <p class="text-sm pt-3 border p-1 rounded-full inline-block pb-3 bg-pink-300 text-white"><strong>인기</strong></p>
                 </div>
                 <div class="flex-grow">
-                  <p class="text-lg"><strong>뼈닭반반</strong></p>
+                  <p class="text-lg"><strong>{manu[0].name}</strong></p>
                   <p class="text-sm"><strong>[후라이드반+양념종류반]</strong></p>
                 </div>
               </div>
