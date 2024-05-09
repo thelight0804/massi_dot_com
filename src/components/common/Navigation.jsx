@@ -6,7 +6,7 @@ import logo from "@/images/logo-full.png";
 const Navigation = () => {
 
   return (
-    <nav className="flex items-center justify-between border-b-2 border-stone-300 p-3 font-do-hyeon">
+    <nav className="flex items-center justify-between p-3 mb-3 font-do-hyeon">
       <div className="flex items-center space-x-4">
         <div className="flex h-auto w-24 items-center justify-center">
           <Link to="/">
