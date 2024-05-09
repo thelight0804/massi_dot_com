@@ -8,7 +8,6 @@ const AppRouter = () => {
     <Routes>
       <Route path={ROUTES.HOME} element={<view.Home />} />
       <Route path={ROUTES.ViewRestaurant} element={<view.ViewRestaurant />} />
-      <Route path={ROUTES.Review} element={<view.Review />} />
       <Route path={ROUTES.MyPage} element={<view.MyPage />} />
       <Route path={ROUTES.RegisterRestaurant} element={<view.RegisterRestaurant />} />
       <Route path={ROUTES.RegisterMenu} element={<view.RegisterMenu />} />
