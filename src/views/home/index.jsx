@@ -7,9 +7,9 @@ import { useRestaurants } from '@/hooks';
 const Home = () => {
   const { // useRestaurants 훅 사용
     restaurants,
-    fetchRestaurants, 
+    fetchRestaurants,
     isLoading: isLoadingRestaurants,
-    error: errorRestaurants } = useRestaurants(6);
+    error: errorRestaurants } = useRestaurants(50); //TODO: 무한 스크롤 구현 시 개수 제한 수정
 
   return (
     <div>
