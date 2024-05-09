@@ -32,7 +32,7 @@ const RestaurantReviews = ({ name, reviews }) => {
                   <span>{review.date}</span> {/* 날짜 */}
                 </p>
                 <p className="text-sm">{review.content}</p> {/* 리뷰 내용 */}
-                <p className="text-sm" style={{ display: 'inline-block', backgroundColor: '#f2f2f2', padding: '5px', borderRadius: '5px' }}> {/* 메뉴 */}
+                <p className="text-sm inline-block bg-gray-200 p-1.5 rounded-lg">
                   {review.eatenMenu} {/* 메뉴 이름 */}
                 </p>
               </div>
