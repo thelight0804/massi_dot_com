@@ -99,8 +99,8 @@ const RegisterMenu = () => {
                 </button>
               </div>
               <div className="bg-gray-100 w-0.5 mx-2" />
-              <div>
-                <div className='flex space-x-4 md:block md:space-x-0'>
+              <div className='md:w-1/3 md:relative'>
+                <div className='flex space-x-4 md:block md:space-x-0 md:absolute md:inset-x-0 md:bottom-0'>
                   <button
                     type="button"
                     className="mt-4 w-full rounded bg-gray-300 px-4 py-2 font-bold text-white hover:bg-gray-500"
