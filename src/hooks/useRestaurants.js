@@ -7,7 +7,7 @@ import firebase from "@/services/firebase"
  */
 const useRestaurants = (itemsCount) => {
   const [restaurants, setRestaurants] = useState([]); // 식당 state
-  const [isLoading, setIsLoading] = useState(false); // 로딩 여부
+  const [isLoading, setIsLoading] = useState(true); // 로딩 여부
   const [error, setError] = useState(''); // 에러 여부
 
   /**
