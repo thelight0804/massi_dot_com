@@ -171,7 +171,7 @@ const RegisterRestaurant = () => {
                 </div>
                 <button
                   type="submit"
-                  className="mt-4 w-full rounded bg-red-300 px-4 py-2 font-bold text-white hover:bg-red-500"
+                  className="btn-secondary"
                 >
                   다음
                 </button>

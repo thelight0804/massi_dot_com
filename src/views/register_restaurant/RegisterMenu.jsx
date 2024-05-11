@@ -93,7 +93,7 @@ const RegisterMenu = () => {
                 </div>
                 <button
                   type="submit"
-                  className="mt-4 w-full rounded bg-orange-300 px-4 py-2 font-bold text-white hover:bg-orange-500"
+                  className="btn-orange"
                 >
                   메뉴 추가
                 </button>
@@ -103,7 +103,7 @@ const RegisterMenu = () => {
                 <div className='flex space-x-4 md:block md:space-x-0 md:absolute md:inset-x-0 md:bottom-0'>
                   <button
                     type="button"
-                    className="mt-4 w-full rounded bg-gray-300 px-4 py-2 font-bold text-white hover:bg-gray-500"
+                    className="btn-gray"
                     onClick={() => {
                       navigate(-1); // 이전 페이지로 이동
                     }}
@@ -112,7 +112,7 @@ const RegisterMenu = () => {
                   </button>
                   <button
                     type="button"
-                    className="mt-4 w-full rounded bg-red-300 px-4 py-2 font-bold text-white hover:bg-red-500"
+                    className="btn-secondary"
                     onClick={() => handleAddRestarant(menuItems)}
                   >
                     등록
