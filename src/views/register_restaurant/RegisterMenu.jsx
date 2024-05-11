@@ -4,11 +4,16 @@ import { Field, Form, Formik } from 'formik';
 import { useNavigate, useLocation } from "react-router-dom";
 import ProgressIndicator from '@/components/common/ProgressIndicator';
 import { useRestaurant } from '@/hooks';
+import ScreenLoader from '@/components/common/ScreenLoader';
 
 const RegisterMenu = () => {
-  var navigate = useNavigate();
-  const location = useLocation();
-  const { addToRestaurant } = useRestaurant();
+  var navigate = useNavigate(); // 이전 페이지로 이동하기 위해 사용
+  const location = useLocation(); // RegisterRestaurant 페이지에서 전달받은 데이터를 사용하기 위해 사용
+  const { // useRestaurant 훅 사용
+    addToRestaurant,
+    isLoading,
+    error
+  } = useRestaurant();
 
   var restaurantInfo = location.state.restaurantInfo; // RegisterRestaurant 페이지에서 전달받은 데이터
   const [menuItems, setMenuItems] = useState([]); // 메뉴 리스트 초기화
@@ -28,6 +33,7 @@ const RegisterMenu = () => {
   return (
     <div>
       <Navigation />
+      {isLoading && <ScreenLoader />}
       <ProgressIndicator currentPage="menu" />
       <div className="mx-auto m-4 w-1/2 border p-4">
         <h3 className="my-4 text-center text-xl font-bold">메뉴 등록</h3>
