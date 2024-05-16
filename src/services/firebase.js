@@ -13,37 +13,39 @@ class Firebase {
   }
 
   // Auth Actions --------------
-  signUp = (email, password) => {
-    createUserWithEmailAndPassword(this.auth, email, password)
-      .then((userCredential) => {
-        // Signed Up
-        const user = userCredential.user;
-        console.log('Firebase.signUp: ', user);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.error('Firebase.signUp: ', errorCode, errorMessage);
+
+  /**
+   * Firebase Auth에서 회원가입하는 함수
+   * @param {String} email 
+   * @param {String} password 
+   * @returns {Promise} userCredential
+   */
+  signUp = async (email, password) =>
+    await createUserWithEmailAndPassword(this.auth, email, password);
+
+  /**
+   * Firebase Auth에서 로그인하는 함수
+   * @param {String} email 
+   * @param {String} password 
+   * @returns {Promise} userCredential
+   */
+  signIn = async (email, password) => 
+    await signInWithEmailAndPassword(this.auth, email, password)
+
+  addUser = async (name, uid) => {
+    try {
+      const docRef = await addDoc(collection(this.db, "users"), {
+        name: name,
+        uid: uid,
       });
+      console.log("Document written with ID: ", docRef.id);
+      return docRef.id;
+    } catch (e) {
+      console.error('Firebase.addUser: ', e);
+    }
   }
 
-
-  signIn = (email, password) => {
-    signInWithEmailAndPassword(this.auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log('Firebase.signIn: ', user);
-      })
-      .catch ((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.error('Firebase.signIn: ', errorCode, errorMessage);
-    });
-  }
-
-
-  // Firestore Actions --------------
+  // Restaurant Actions --------------
 
   /**
    * Firestore에서 여러 식당 데이터를 가져오는 함수
@@ -128,8 +130,6 @@ class Firebase {
     }
   }
 
-
-
   // Storage Actions --------------
 
   /**
@@ -157,7 +157,6 @@ class Firebase {
     }
   }
 }
-
 
 const firebaseInstance = new Firebase(); // Firebase 생성자
 export default firebaseInstance; // Firebase 인스턴스 내보내기

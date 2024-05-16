@@ -1,11 +1,14 @@
 import Navigation from '@/components/common/Navigation';
-import firebase from "@/services/firebase";
-import * as ROUTE from "@/constants/routes";
 import { Field, Form, Formik } from 'formik';
+import { useAuth } from '@/hooks';
 
 const SignUp = () => {
-  // firebase.signUp("123@test.com", "123456") // 회원가입
-  // firebase.signIn("test@test.com", "test123") // 로그인
+  //TODO: 식당 관계자인지, 일반 사용자인지 선택하는 radio 버튼 추가, 프로필 이미지 추가
+  const {
+    onFormSubmit,
+    isLoding,
+    error
+  } = useAuth();
 
   return (
     <div>
@@ -14,12 +17,12 @@ const SignUp = () => {
         <h3 className="my-4 text-center text-xl font-bold">회원가입</h3>
         <Formik
           initialValues={{
-            userName: "",
+            name: "",
             email: "",
             password: "",
           }}
           onSubmit={(values) => {
-            console.log(values);
+            onFormSubmit(values);
           }}
         >
           {() => (
@@ -28,12 +31,12 @@ const SignUp = () => {
                 <div className="text-center">
                   <label
                     className="block pb-2 pt-4 text-sm font-bold"
-                    htmlFor="userName"
+                    htmlFor="name"
                   >
                     이름
                   </label>
                   <Field
-                    name="userName"
+                    name="name"
                     type="text" // input 태그의 type 속성
                     label="이름" // input 태그의 label 속성
                     placeholder="맛있닷컴" // 힌트
@@ -54,6 +57,7 @@ const SignUp = () => {
                     label="이메일"
                     placeholder="test@example.com"
                     className="w-full border py-2 text-center"
+                    pattern="[a-zA-Z0-9._\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,4}"
                     required
                   />
                 </div>
