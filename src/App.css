@@ -5,9 +5,9 @@
 /* 
 Palette:
 - Color
-  bg-red-100
-  bg-red-300
-  bg-red-500
+  bg-red-100 // #fee2e2
+  bg-red-300 // #fca5a5
+  bg-red-500 // #ef4444
 
 - Font
   font-noto-sans-kr
@@ -18,3 +18,30 @@ Palette:
 - Responsive Design
   md:
 */
+
+@layer components {
+  /* 강조 버튼 */
+  .btn-primary {
+    @apply rounded-md bg-red-500 px-4 py-4 text-white hover:bg-red-300;
+  }
+
+  /* 보조 버튼 */
+  .btn-secondary {
+    @apply mt-4 w-full rounded bg-red-300 px-4 py-2 font-bold text-white hover:bg-red-500;
+  }
+
+  /* 회색 버튼 */
+  .btn-gray {
+    @apply mt-4 w-full rounded bg-gray-300 px-4 py-2 font-bold text-white hover:bg-gray-500;
+  }
+
+  /* 주황색 버튼 */
+  .btn-orange {
+    @apply mt-4 w-full rounded bg-orange-300 px-4 py-2 font-bold text-white hover:bg-orange-500;
+  }
+
+  /* 링크 버튼 */
+  .btn-link {
+    @apply rounded-md px-4 py-4 hover:bg-gray-100;
+  }
+}

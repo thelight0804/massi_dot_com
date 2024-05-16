@@ -3,6 +3,7 @@ import Navigation from '@/components/common/Navigation';
 import RestaurantGrid from '@/components/restaurant/RestaurantGrid';
 import bannerImg from '@/images/banner-ramen.png'
 import { useRestaurants } from '@/hooks';
+import Preloader from '@/components/common/Preloader';
 
 const Home = () => {
   const { // useRestaurants 훅 사용
@@ -23,9 +24,13 @@ const Home = () => {
         <img src={bannerImg} alt="banner" className="hidden md:block md:h-60 md:p-5" />
       </div>
       <div>
-        {errorRestaurants && !isLoadingRestaurants ? (
-          console.log(errorRestaurants) // 에러 메시지 출력
-        ) : (
+        {errorRestaurants ? ( // 에러 발생 시
+          alert("오류가 발생했습니다. \n 페이지를 새로고침 해주세요.")
+        ) : isLoadingRestaurants ? ( // 로딩 중일 때
+            <div className="mt-8">
+              <Preloader />
+            </div>
+        ) : ( // 로딩 완료 시
           <RestaurantGrid restaurants={restaurants} />
         )}
       </div>
