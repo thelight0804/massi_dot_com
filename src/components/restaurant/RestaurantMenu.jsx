@@ -6,41 +6,31 @@ const RestaurantMenu = ({ menu, info }) => {
 
 
   return (
-    <div>
-      {/*1번째 메뉴*/}
-      <div className></div>
-      <div className="flex">
-        <div className="w-1/2 p-4">
-          <div className="flex">
-            <div className="flex-none">
-              
+    <div className="md:flex md:flex-wrap md:justify-center">  {/*다음 줄 나열, 가운데 배치*/}
+
+    {menu.map((item, index) => (
+      <div key={index} className="md:w-1/2 md:border md: border-red-100 md:rounded-lg md:max-w-2xl md:mx-2 md:my-2">
+        {/*w-1/2:넓이 차지, border: 테두리, rounded: 테두리 모양,
+        max-w-2xl:크기 고정, md:mx-2 md:my-2: 요소 간의 간격 조절 */}
+        <div className="flex">
+          <div className="w-1/2 p-4">{/*메뉴 정보 부분의 화면*/}
+            <div className="flex">
+              <div className="flex-grow">
+                <p className="text-lg"><strong>{item.name}</strong></p>
+              </div>
             </div>
-            <div className="flex-grow">
-              <p className="text-lg"><strong>{menu[0].name}</strong></p>
-            </div>
+            <p className="text-sm"><strong>{item.price}</strong></p>
           </div>
-          <p className="text-sm"><strong>{menu[0].price}</strong></p>
+          <div className="w-1/2 p-4 flex justify-end">{/*메뉴 이미지 부분의 화면*/}
+            <img src={item.image}
+              alt="사진" className="w-32 h-auto rounded-xl" />
+          </div>
         </div>
-        <div className="w-1/2 p-4 flex justify-end">
-          <img src={menu[0].image}
-            alt="사진" className="w-32 h-auto rounded-xl" />
-        </div>
+        {/*메뉴구분선*/}
+      <div className="border-t-2 border-red-100 md:hidden"></div>
       </div>
-
-
-      {/*2번째 메뉴*/}
-      <div className="border-t-2 border-red-100 ..."></div>
-      <div className="flex">
-        <div className="w-1/2 p-4 ">
-          <p className="text-lg"><strong>{menu[1].name}</strong></p>
-          <p className="text-sm"><strong>{menu[1].price}</strong></p>
-        </div>
-        <div className="w-1/2 p-4 flex justify-end">
-          <img src={menu[1].image}
-            alt="사진" className="w-32 h-auto rounded-xl" />
-        </div>
-      </div>
-    </div>
+    ))}
+  </div>
   );
 };
 
