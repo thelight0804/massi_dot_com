@@ -20,9 +20,9 @@ const RestaurantReviews = ({ name, reviews }) => {
       <div> {/* 리뷰 목록 */}
         {/* map 함수로 reviews 배열을 순회하며 리뷰 목록을 출력 */}
         {reviews.map((review, index) => (
-          <div key={index}>
-            <div className="flex">
-              <div className="w-1/2 p-4">
+          <div className="md:flex" key={index}>
+            <div className="flex justify-around">
+              <div className="w-full p-4">
                 <div className="flex items-center">
                   <img src={review.profileImage} className="w-5 h-5 rounded-xl mr-1" /> {/* 프로필 이미지 */}
                   <p className="text-lg font-bold">{review.userName}</p> {/* 유저 이름 */}
@@ -46,7 +46,7 @@ const RestaurantReviews = ({ name, reviews }) => {
                 </div>
               </div>
             </div>
-            <p className="text-sm bg-slate-200 p-2.5 rounded-lg relative max-w-screen-lg ml-7">
+            <p className="text-sm bg-slate-200 p-2.5 rounded-lg relative w-full ml-7">
               {review.reply && ( // 답글이 존재하면 출력
                 <>
                   <p className="text-lg font-bold">사장님</p>
