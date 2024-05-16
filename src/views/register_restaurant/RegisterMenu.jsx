@@ -4,11 +4,16 @@ import { Field, Form, Formik } from 'formik';
 import { useNavigate, useLocation } from "react-router-dom";
 import ProgressIndicator from '@/components/common/ProgressIndicator';
 import { useRestaurant } from '@/hooks';
+import ScreenLoader from '@/components/common/ScreenLoader';
 
 const RegisterMenu = () => {
-  var navigate = useNavigate();
-  const location = useLocation();
-  const { addToRestaurant } = useRestaurant();
+  var navigate = useNavigate(); // 이전 페이지로 이동하기 위해 사용
+  const location = useLocation(); // RegisterRestaurant 페이지에서 전달받은 데이터를 사용하기 위해 사용
+  const { // useRestaurant 훅 사용
+    addToRestaurant,
+    isLoading,
+    error
+  } = useRestaurant();
 
   var restaurantInfo = location.state.restaurantInfo; // RegisterRestaurant 페이지에서 전달받은 데이터
   const [menuItems, setMenuItems] = useState([]); // 메뉴 리스트 초기화
@@ -28,6 +33,7 @@ const RegisterMenu = () => {
   return (
     <div>
       <Navigation />
+      {isLoading && <ScreenLoader />}
       <ProgressIndicator currentPage="menu" />
       <div className="mx-auto m-4 w-1/2 border p-4">
         <h3 className="my-4 text-center text-xl font-bold">메뉴 등록</h3>
@@ -87,17 +93,17 @@ const RegisterMenu = () => {
                 </div>
                 <button
                   type="submit"
-                  className="mt-4 w-full rounded bg-orange-300 px-4 py-2 font-bold text-white hover:bg-orange-500"
+                  className="btn-orange"
                 >
                   메뉴 추가
                 </button>
               </div>
               <div className="bg-gray-100 w-0.5 mx-2" />
-              <div>
-                <div className='flex space-x-4 md:block md:space-x-0'>
+              <div className='md:w-1/3 md:relative'>
+                <div className='flex space-x-4 md:block md:space-x-0 md:absolute md:inset-x-0 md:bottom-0'>
                   <button
                     type="button"
-                    className="mt-4 w-full rounded bg-gray-300 px-4 py-2 font-bold text-white hover:bg-gray-500"
+                    className="btn-gray"
                     onClick={() => {
                       navigate(-1); // 이전 페이지로 이동
                     }}
@@ -106,7 +112,7 @@ const RegisterMenu = () => {
                   </button>
                   <button
                     type="button"
-                    className="mt-4 w-full rounded bg-red-300 px-4 py-2 font-bold text-white hover:bg-red-500"
+                    className="btn-secondary"
                     onClick={() => handleAddRestarant(menuItems)}
                   >
                     등록
