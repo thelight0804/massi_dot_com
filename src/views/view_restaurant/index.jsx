@@ -21,7 +21,10 @@ const ViewRestaurant = () => {
       tabTitle: (
         <li
           key={0}
-          className={`flex-1 text-sm pt-2 pb-2 cursor-pointer text-center ${activeIndex === 0 ? "bg-white text-black border-t-2 border-r border-red-300 font-bold" : "border-b-2 border-red-300   "}`}
+          className={`flex-1 text-sm pt-2 pb-2 cursor-pointer text-center 
+          ${activeIndex === 0 
+          ? "bg-white text-black border-t-2 border-r border-red-300 font-bold" 
+          : "border-b-2 border-red-300"}`}
           onClick={() => tabClickHandler(0)}
         >
           메뉴
@@ -35,7 +38,10 @@ const ViewRestaurant = () => {
       tabTitle: (
         <li
           key={1}
-          className={`flex-1 text-sm pt-2 pb-2 cursor-pointer text-center border-b-2 border-red-300 ${activeIndex === 1 ? "bg-white text-black border-t-2 border-black border-l border-r border-red-300 font-bold border-b-0" : ""}`}
+          className={`flex-1 text-sm pt-2 pb-2 cursor-pointer text-center 
+          ${activeIndex === 1 
+            ? "bg-white text-black border-t-2 border-l border-r border-red-300 font-bold" 
+            : "border-b-2 border-red-300"}`}
           onClick={() => tabClickHandler(1)}
         >
           정보·원산지
@@ -49,7 +55,10 @@ const ViewRestaurant = () => {
       tabTitle: (
         <li
           key={2}
-          className={`flex-1 text-sm pt-2 pb-2 cursor-pointer text-center border-b-2 border-red-300 ${activeIndex === 2 ? "bg-white text-black border-t-2 border-black border-l border-red-300 font-bold border-b-0" : ""}`}
+          className={`flex-1 text-sm pt-2 pb-2 cursor-pointer text-center 
+          ${activeIndex === 2 
+            ? "bg-white text-black border-t-2 border-l border-red-300 font-bold border-b-0" 
+            : "border-b-2 border-red-300"}`}
           onClick={() => tabClickHandler(2)}
         >
           리뷰
