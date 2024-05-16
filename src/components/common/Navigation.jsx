@@ -23,7 +23,7 @@ const Navigation = () => {
         <li>
           <NavLink
             className="btn-primary"
-            to={ROUTE.SignUp}>회원 등록</NavLink>
+            to={ROUTE.SignUp}>회원가입</NavLink>
         </li>
         <li>
           <NavLink

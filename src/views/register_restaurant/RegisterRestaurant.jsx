@@ -122,7 +122,7 @@ const RegisterRestaurant = () => {
                     label="전화번호"
                     placeholder="010-1234-5678"
                     className="w-full border py-2 text-center"
-                    pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" // 전화번호 형식 //FIX: 첫 3자리는 2자리도 허용해야 함
+                    pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" // 전화번호 형식
                     required
                   />
                 </div>
@@ -180,7 +180,6 @@ const RegisterRestaurant = () => {
           )}
         </Formik>
       </div>
-      <div></div>
     </div>
   );
 };

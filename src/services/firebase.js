@@ -1,5 +1,6 @@
 import firebaseConfig from "./config"; // Firebase 설정 가져오기
 import { initializeApp } from "firebase/app";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { collection, getDocs, getFirestore, query, limit, addDoc, updateDoc, doc } from "firebase/firestore"; // Firestore 데이터 받아오기
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 
@@ -8,9 +9,41 @@ class Firebase {
     this.app = initializeApp(firebaseConfig);
     this.db = getFirestore(this.app); // Initialize Firestore
     this.storage = getStorage(this.app); // Initialize Storage
+    this.auth = getAuth(this.app); // Initialize Auth
   }
 
-  // Firestore Funtions --------------
+  // Auth Actions --------------
+  signUp = (email, password) => {
+    createUserWithEmailAndPassword(this.auth, email, password)
+      .then((userCredential) => {
+        // Signed Up
+        const user = userCredential.user;
+        console.log('Firebase.signUp: ', user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error('Firebase.signUp: ', errorCode, errorMessage);
+      });
+  }
+
+
+  signIn = (email, password) => {
+    signInWithEmailAndPassword(this.auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log('Firebase.signIn: ', user);
+      })
+      .catch ((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error('Firebase.signIn: ', errorCode, errorMessage);
+    });
+  }
+
+
+  // Firestore Actions --------------
 
   /**
    * Firestore에서 여러 식당 데이터를 가져오는 함수
@@ -97,7 +130,7 @@ class Firebase {
 
 
 
-  // Storage Funtions --------------
+  // Storage Actions --------------
 
   /**
    * 파일을 Storage에 업로드하는 함수
