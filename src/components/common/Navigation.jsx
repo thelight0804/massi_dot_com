@@ -4,7 +4,6 @@ import * as ROUTE from "@/constants/routes";
 import logo from "@/images/logo-full.png";
 
 const Navigation = () => {
-
   return (
     <nav className="flex items-center justify-between p-3 mb-3 font-do-hyeon">
       <div className="flex items-center space-x-4">

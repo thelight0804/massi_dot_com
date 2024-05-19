@@ -6,6 +6,7 @@ import { useRestaurants } from '@/hooks';
 import Preloader from '@/components/common/Preloader';
 
 const Home = () => {
+  // TODO: 자동 로그인 구현
   const { // useRestaurants 훅 사용
     restaurants,
     fetchRestaurants,

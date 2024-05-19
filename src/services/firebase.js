@@ -10,7 +10,7 @@ class Firebase {
     this.db = getFirestore(this.app); // Initialize Firestore
     this.storage = getStorage(this.app); // Initialize Storage
     this.auth = getAuth(this.app); // Initialize Auth
-    setPersistence(this.auth, browserLocalPersistence) // 브라우저 종료 시까지 유지
+    setPersistence(this.auth, browserLocalPersistence) // 로그인 정보를 LocalStorage에 저장
   }
 
   // Auth Actions --------------
@@ -65,6 +65,19 @@ class Firebase {
       return docRef.id;
     } catch (e) {
       console.error('Firebase.addUser: ', e);
+    }
+  }
+
+  /**
+   * Firebase에 로그인한 유저 정보를 가져오는 함수
+   * @returns 로그인 한 유저 정보
+   */
+  getCurrentUser = () => {
+    const user = this.auth.currentUser;
+    if (user) {
+      return user;
+    } else {
+      return null;
     }
   }
 

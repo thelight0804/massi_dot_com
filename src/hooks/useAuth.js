@@ -29,6 +29,9 @@ const useAuth = () => {
     setIsLoading(false);
   };
 
+  /**
+   * 로그인 폼 제출 시 호출되는 함수
+   */
   const onFormSignIn = async (values) => {
     setIsLoading(true);
     
@@ -50,8 +53,12 @@ const useAuth = () => {
     setIsLoading(false);
   };
 
+  const getUser = () => {
+    return firebase.getCurrentUser();
+  }
+
   return {
-    onFormSignUp, onFormSignIn, isLoading, error
+    onFormSignUp, onFormSignIn, getUser, isLoading, error
   };
 }
 
