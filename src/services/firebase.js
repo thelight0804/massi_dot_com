@@ -20,8 +20,20 @@ class Firebase {
    * @param {String} password 
    * @returns {Promise} userCredential
    */
-  signUp = async (email, password) =>
-    await createUserWithEmailAndPassword(this.auth, email, password);
+  signUp = async (values) =>
+    await createUserWithEmailAndPassword(this.auth, values.email, values.password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log('firebase.signUp : ', user);
+
+        // Firestore에 사용자 데이터 추가
+        this.addUser(user.uid, values.email, values.name, values.phoneNumber, values.address);
+
+        return user;
+      })
+      .catch((error) => {
+        return error;
+      });
 
   /**
    * Firebase Auth에서 로그인하는 함수
@@ -32,11 +44,15 @@ class Firebase {
   signIn = async (email, password) => 
     await signInWithEmailAndPassword(this.auth, email, password)
 
-  addUser = async (name, uid) => {
+  addUser = async (uid, email, name, phoneNumber, address) => {
     try {
       const docRef = await addDoc(collection(this.db, "users"), {
-        name: name,
         uid: uid,
+        email: email,
+        name: name,
+        phoneNumber: phoneNumber,
+        address: address,
+        profileImage: null, // 프로필 이미지 URL은 null로 초기화
       });
       console.log("Document written with ID: ", docRef.id);
       return docRef.id;

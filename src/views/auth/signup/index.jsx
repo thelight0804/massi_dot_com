@@ -1,38 +1,39 @@
 import Navigation from '@/components/common/Navigation';
 import { Field, Form, Formik } from 'formik';
 import { useAuth } from '@/hooks';
+import ScreenLoader from '@/components/common/ScreenLoader';
 
 const SignUp = () => {
   //TODO: 식당 관계자인지, 일반 사용자인지 선택하는 radio 버튼 추가, 프로필 이미지 추가
   const {
     onFormSubmit,
-    isLoding,
+    isLoading,
     error
   } = useAuth();
 
   return (
     <div>
       <Navigation />
+      {isLoading && <ScreenLoader />}
       <div className="m-4 mx-auto w-1/2 border p-4">
         <h3 className="my-4 text-center text-xl font-bold">회원가입</h3>
         <Formik
           initialValues={{
-            name: "",
-            email: "",
-            password: "",
+            name: "", // 이름
+            email: "", // 이메일
+            password: "", // 비밀번호
+            phoneNumber: "", // 전화번호
+            address: "", // 주소
           }}
           onSubmit={(values) => {
             onFormSubmit(values);
           }}
         >
           {() => (
-            <Form className="justify-evenly md:flex">
+            <Form className="block md:flex md:justify-evenly">
               <div>
                 <div className="text-center">
-                  <label
-                    className="block pb-2 pt-4 text-sm font-bold"
-                    htmlFor="name"
-                  >
+                  <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="name" >
                     이름
                   </label>
                   <Field
@@ -45,10 +46,7 @@ const SignUp = () => {
                   />
                 </div>
                 <div className="text-center">
-                  <label
-                    className="block pb-2 pt-4 text-sm font-bold"
-                    htmlFor="email"
-                  >
+                  <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="email" >
                     이메일
                   </label>
                   <Field
@@ -62,10 +60,7 @@ const SignUp = () => {
                   />
                 </div>
                 <div className="text-center">
-                  <label
-                    className="block pb-2 pt-4 text-sm font-bold"
-                    htmlFor="password"
-                  >
+                  <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="password" >
                     비밀번호
                   </label>
                   <Field
@@ -79,8 +74,33 @@ const SignUp = () => {
                   />
                 </div>
               </div>
-              <div className="mx-2 w-0.5 bg-gray-100" />
-              <div className="md:relative md:w-1/3">
+              <div className="w-0.5 md:mx-2 bg-gray-100" />
+              <div className="md:w-1/3 md:relative">
+                <div className="text-center">
+                  <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="phoneNumber" >
+                    전화번호
+                  </label>
+                  <Field
+                    name="phoneNumber"
+                    type="tel"
+                    label="전화번호"
+                    placeholder="010-1234-5678"
+                    className="w-full border py-2 text-center"
+                    pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
+                    required
+                  />
+                  <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="address">
+                    주소
+                  </label>
+                  <Field
+                    name="address"
+                    type="text"
+                    label="주소"
+                    placeholder="서울시 강남구 역삼동"
+                    className="w-full border py-2 text-center"
+                    required
+                  />
+                </div>
                 <div className="flex space-x-4 md:absolute md:inset-x-0 md:bottom-0 md:block md:space-x-0">
                   <button type="submit" className="btn-secondary">
                     회원가입
