@@ -28,6 +28,11 @@ const Navigation = () => {
         <li>
           <NavLink
             className="btn-link"
+            to={ROUTE.SignIn}>로그인</NavLink>
+        </li>
+        <li>
+          <NavLink
+            className="btn-link"
             to={ROUTE.MyPage}>마이 페이지</NavLink>
         </li>
       </ul>

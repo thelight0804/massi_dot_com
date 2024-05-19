@@ -16,9 +16,8 @@ class Firebase {
 
   /**
    * Firebase Auth에서 회원가입하는 함수
-   * @param {String} email 
-   * @param {String} password 
-   * @returns {Promise} userCredential
+   * @param {Object} values 회원가입 폼 데이터
+   * @returns {Promise} userCredential 유저 정보
    */
   signUp = async (values) =>
     await createUserWithEmailAndPassword(this.auth, values.email, values.password)
@@ -43,7 +42,18 @@ class Firebase {
    */
   signIn = async (email, password) => 
     await signInWithEmailAndPassword(this.auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log('firebase.signIn : ', user);
+        return user;
+      })
 
+  /**
+   * Firestore에 유저 데이터를 추가하는 함수
+   * @param {String} uid 유저 고유 ID
+   * @param {Object} values 유저 데이터
+   * @returns 
+   */
   addUser = async (uid, values) => {
     try {
       const docRef = await addDoc(collection(this.db, "users"), {
