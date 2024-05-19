@@ -24,6 +24,7 @@ const SignUp = () => {
             password: "", // 비밀번호
             phoneNumber: "", // 전화번호
             address: "", // 주소
+            isOwner: false // 식당 관계자 여부
           }}
           onSubmit={(values) => {
             onFormSubmit(values);
@@ -89,6 +90,8 @@ const SignUp = () => {
                     pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
                     required
                   />
+                </div>
+                <div className="text-center">
                   <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="address">
                     주소
                   </label>
@@ -101,7 +104,20 @@ const SignUp = () => {
                     required
                   />
                 </div>
-                <div className="flex space-x-4 md:absolute md:inset-x-0 md:bottom-0 md:block md:space-x-0">
+                <div className="text-center">
+                  <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="isOwner">
+                    식당 관계자
+                  </label>
+                  <div className="flex justify-evenly border-2 border-gray-100 py-2">
+                    <p className='text-right text-sm'>사장님이면 체크해 주세요</p>
+                    <Field
+                      name="isOwner"
+                      type="checkbox"
+                      className="border py-2 text-center"
+                    />
+                  </div>
+                </div>
+                <div className="flex space-x-4 md:inset-x-0 md:bottom-0 md:block md:space-x-0">
                   <button type="submit" className="btn-secondary">
                     회원가입
                   </button>

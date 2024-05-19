@@ -27,7 +27,7 @@ class Firebase {
         console.log('firebase.signUp : ', user);
 
         // Firestore에 사용자 데이터 추가
-        this.addUser(user.uid, values.email, values.name, values.phoneNumber, values.address);
+        this.addUser(user.uid, values);
 
         return user;
       })
@@ -44,15 +44,16 @@ class Firebase {
   signIn = async (email, password) => 
     await signInWithEmailAndPassword(this.auth, email, password)
 
-  addUser = async (uid, email, name, phoneNumber, address) => {
+  addUser = async (uid, values) => {
     try {
       const docRef = await addDoc(collection(this.db, "users"), {
         uid: uid,
-        email: email,
-        name: name,
-        phoneNumber: phoneNumber,
-        address: address,
+        email: values.email,
+        name: values.name,
+        phoneNumber: values.phoneNumber,
+        address: values.address,
         profileImage: null, // 프로필 이미지 URL은 null로 초기화
+        isOwner: values.isOwner,
       });
       console.log("Document written with ID: ", docRef.id);
       return docRef.id;
