@@ -1,6 +1,6 @@
 import firebaseConfig from "./config"; // Firebase 설정 가져오기
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { collection, getDocs, getFirestore, query, limit, addDoc, updateDoc, doc } from "firebase/firestore"; // Firestore 데이터 받아오기
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 
@@ -10,6 +10,7 @@ class Firebase {
     this.db = getFirestore(this.app); // Initialize Firestore
     this.storage = getStorage(this.app); // Initialize Storage
     this.auth = getAuth(this.app); // Initialize Auth
+    setPersistence(this.auth, browserLocalPersistence) // 브라우저 종료 시까지 유지
   }
 
   // Auth Actions --------------
@@ -41,12 +42,7 @@ class Firebase {
    * @returns {Promise} userCredential
    */
   signIn = async (email, password) => 
-    await signInWithEmailAndPassword(this.auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log('firebase.signIn : ', user);
-        return user;
-      })
+    signInWithEmailAndPassword(this.auth, email, password)
 
   /**
    * Firestore에 유저 데이터를 추가하는 함수

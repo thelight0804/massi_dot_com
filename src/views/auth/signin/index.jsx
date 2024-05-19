@@ -22,8 +22,9 @@ const SignIn = () => {
             email: "", // 이메일
             password: "", // 비밀번호
           }}
-          onSubmit={(values) => {
+          onSubmit={(values, {resetForm}) => {
             onFormSignIn(values);
+            resetForm(); // Form 초기화
           }}
         >
           {() => (
@@ -66,7 +67,7 @@ const SignIn = () => {
               <div className="w-0.5 bg-gray-100 md:mx-2" />
               <div className="md:relative md:w-1/3">
                 <div className="flex space-x-4 md:absolute md:inset-x-0 md:bottom-0 md:block md:space-x-0">
-                  <button type="submit" className="btn-secondary w-full">
+                  <button type="submit" className="btn-secondary w-full mt-4">
                     로그인
                   </button>
                 </div>
