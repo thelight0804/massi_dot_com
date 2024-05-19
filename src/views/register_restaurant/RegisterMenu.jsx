@@ -93,7 +93,7 @@ const RegisterMenu = () => {
                 </div>
                 <button
                   type="submit"
-                  className="btn-orange"
+                  className="btn-orange w-full mt-4"
                 >
                   메뉴 추가
                 </button>
@@ -103,7 +103,7 @@ const RegisterMenu = () => {
                 <div className='flex space-x-4 md:block md:space-x-0 md:absolute md:inset-x-0 md:bottom-0'>
                   <button
                     type="button"
-                    className="btn-gray"
+                    className="btn-gray w-full mt-4"
                     onClick={() => {
                       navigate(-1); // 이전 페이지로 이동
                     }}
@@ -112,7 +112,7 @@ const RegisterMenu = () => {
                   </button>
                   <button
                     type="button"
-                    className="btn-secondary"
+                    className="btn-secondary w-full mt-4"
                     onClick={() => handleAddRestarant(menuItems)}
                   >
                     등록

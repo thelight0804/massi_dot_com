@@ -4,9 +4,8 @@ import { useAuth } from '@/hooks';
 import ScreenLoader from '@/components/common/ScreenLoader';
 
 const SignUp = () => {
-  //TODO: 식당 관계자인지, 일반 사용자인지 선택하는 radio 버튼 추가, 프로필 이미지 추가
   const {
-    onFormSubmit,
+    onFormSignUp,
     isLoading,
     error
   } = useAuth();
@@ -27,7 +26,7 @@ const SignUp = () => {
             isOwner: false // 식당 관계자 여부
           }}
           onSubmit={(values) => {
-            onFormSubmit(values);
+            onFormSignUp(values);
           }}
         >
           {() => (
@@ -118,7 +117,7 @@ const SignUp = () => {
                   </div>
                 </div>
                 <div className="flex space-x-4 md:inset-x-0 md:bottom-0 md:block md:space-x-0">
-                  <button type="submit" className="btn-secondary">
+                  <button type="submit" className="btn-secondary w-full mt-4">
                     회원가입
                   </button>
                 </div>

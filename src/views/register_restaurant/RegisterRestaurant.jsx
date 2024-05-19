@@ -171,7 +171,7 @@ const RegisterRestaurant = () => {
                 </div>
                 <button
                   type="submit"
-                  className="btn-secondary"
+                  className="btn-secondary w-full mt-4"
                 >
                   다음
                 </button>
