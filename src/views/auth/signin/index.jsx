@@ -2,7 +2,6 @@ import * as ROUTE from "@/constants/routes";
 import { NavLink } from "react-router-dom";
 import { Field, Form, Formik } from 'formik';
 import { useAuth } from '@/hooks';
-import Navigation from '@/components/common/Navigation';
 import ScreenLoader from '@/components/common/ScreenLoader';
 
 const SignIn = () => {
@@ -13,7 +12,6 @@ const SignIn = () => {
 
   return (
     <div>
-      <Navigation />
       {isLoading && <ScreenLoader />}
       <div className="m-4 mx-auto mb-0 w-1/2 border p-4">
         <h3 className="my-4 text-center text-xl font-bold">로그인</h3>

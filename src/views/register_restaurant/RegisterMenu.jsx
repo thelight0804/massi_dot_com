@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Navigation from '@/components/common/Navigation';
 import { Field, Form, Formik } from 'formik';
 import { useNavigate, useLocation } from "react-router-dom";
 import ProgressIndicator from '@/components/common/ProgressIndicator';
@@ -32,7 +31,6 @@ const RegisterMenu = () => {
 
   return (
     <div>
-      <Navigation />
       {isLoading && <ScreenLoader />}
       <ProgressIndicator currentPage="menu" />
       <div className="mx-auto m-4 w-1/2 border p-4">

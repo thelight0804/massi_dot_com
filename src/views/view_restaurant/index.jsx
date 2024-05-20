@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState } from 'react';
-import Navigation from '@/components/common/Navigation';
 import RestaurantInfomation from '@/components/restaurant/RestaurantInfomation';
 import RestaurantMenu from '@/components/restaurant/RestaurantMenu';
 import RestaurantReviews from '@/components/restaurant/RestaurantReviews';
@@ -72,7 +71,6 @@ const ViewRestaurant = () => {
 
   return (
     <div>
-      <Navigation />
       <ul className="flex space-x-4 mt-10">
         {tabContArr.map((section) => section.tabTitle)}
       </ul>

@@ -1,4 +1,3 @@
-import Navigation from '@/components/common/Navigation';
 import { Field, Form, Formik } from 'formik';
 import { useAuth } from '@/hooks';
 import ScreenLoader from '@/components/common/ScreenLoader';
@@ -12,7 +11,6 @@ const SignUp = () => {
 
   return (
     <div>
-      <Navigation />
       {isLoading && <ScreenLoader />}
       <div className="m-4 mx-auto w-1/2 border p-4">
         <h3 className="my-4 text-center text-xl font-bold">회원가입</h3>

@@ -1,5 +1,4 @@
 import React from 'react';
-import Navigation from '@/components/common/Navigation';
 import ProgressIndicator from '@/components/common/ProgressIndicator';
 import { useNavigate } from "react-router-dom";
 import * as ROUTE from "@/constants/routes";
@@ -10,7 +9,6 @@ const RegisterRestaurant = () => {
 
   return (
     <div>
-      <Navigation />
       <ProgressIndicator currentPage="restaurant" />
       <div className="mx-auto m-4 w-1/2 border p-4">
         <h3 className="my-4 text-center text-xl font-bold">식당 등록</h3>

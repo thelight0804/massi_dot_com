@@ -1,5 +1,4 @@
 import React from 'react';
-import Navigation from '@/components/common/Navigation';
 import RestaurantGrid from '@/components/restaurant/RestaurantGrid';
 import bannerImg from '@/images/banner-ramen.png'
 import { useRestaurants } from '@/hooks';
@@ -15,7 +14,6 @@ const Home = () => {
 
   return (
     <div>
-      <Navigation />
       <div className="flex w-full items-center justify-center bg-red-300 p-5 md:max-h-60 md:justify-evenly">
         <div className="text-center text-gray-800">
           <h1 className="font-do-hyeon text-3xl font-bold">맛의 표현, 리뷰의 힘</h1>
