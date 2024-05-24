@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const useRestaurant = () => {
   const navigate = useNavigate();
+
   const [isLoading, setIsLoading] = useState(false); // 로딩 여부
   const [error, setError] = useState(''); // 에러 여부
 

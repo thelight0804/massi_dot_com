@@ -31,6 +31,7 @@ const RegisterMenu = () => {
     if (menuItems.length === 0 && !window.confirm('메뉴가 추가되지 않았습니다. 그래도 등록하시겠습니까?')) {
       return;
     }
+    restaurantInfo.uid = user.uid; // 사용자 uid 추가
     addToRestaurant(restaurantInfo, menuItems); // 식당 등록 함수 호출
   };
 

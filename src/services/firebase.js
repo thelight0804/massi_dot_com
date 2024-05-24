@@ -44,6 +44,10 @@ class Firebase {
   signIn = async (email, password) => 
     signInWithEmailAndPassword(this.auth, email, password)
 
+  /**
+   * Firebase Auth에서 로그아웃하는 함수
+   * @returns signOut 함수 실행 결과
+   */
   signOut = async () => {
     try {
       await signOut(this.auth);
@@ -144,6 +148,7 @@ class Firebase {
     try {
       // 메뉴 데이터에 이미지 제거
       var menu = value.menu.map(item => ({ ...item, image: null }));
+      console.log('value.uid: ', value.uid);
 
       // Firestore에 식당 데이터 추가
       const docRef = await addDoc(collection(this.db, "restaurant"), {
@@ -152,6 +157,7 @@ class Firebase {
         mainMenu: value.mainMenu,
         image: null, // 이미지 URL은 null로 초기화
         menu: menu, // 이미지를 제거한 메뉴 데이터 추가
+        uid: value.uid, // 사용자 ID 추가
       });
       console.log("Document written with ID: ", docRef.id); // 등록된 식당 ID 출력
       return docRef.id; // 등록된 식당 ID 반환
