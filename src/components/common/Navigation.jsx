@@ -2,20 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import * as ROUTE from "@/constants/routes";
 import logo from "@/images/logo-full.png";
-import useAuth from "@/hooks/useAuth";
+import { useSelector } from "react-redux";
 
 const Navigation = () => {
-  const {
-    getUser,
-  } = useAuth();
-
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const localUserData = getUser();
-    console.log('localUserData:', localUserData);
-  }, []);
-
+  const user = useSelector((state) => state.user);
+  console.log('Navigation : ', user)
 
   return (
     <nav className="flex items-center justify-between p-3 mb-3 font-do-hyeon">

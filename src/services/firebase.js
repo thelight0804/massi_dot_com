@@ -1,7 +1,7 @@
 import firebaseConfig from "./config"; // Firebase 설정 가져오기
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, setPersistence, browserLocalPersistence } from "firebase/auth";
-import { collection, getDocs, getFirestore, query, limit, addDoc, updateDoc, doc } from "firebase/firestore"; // Firestore 데이터 받아오기
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, setPersistence, browserLocalPersistence, onAuthStateChanged } from "firebase/auth";
+import { collection, getDocs, getDoc, getFirestore, query, limit, addDoc, updateDoc, doc, where } from "firebase/firestore"; // Firestore 데이터 받아오기
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 
 class Firebase {
@@ -69,17 +69,38 @@ class Firebase {
   }
 
   /**
+   * Firestore에서 유저 데이터를 가져오는 함수
+   * @param {String} uid 유저 고유 ID
+   * @returns {Object} userData 유저 데이터
+   */
+  getUser = async (uid) => {
+    const usersRef = collection(this.db, "users");
+    const q = query(usersRef, where("uid", "==", uid));
+    const querySnapshot = await getDocs(q);
+    let userData = {};
+    querySnapshot.forEach((doc) => {
+      userData = {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
+    return userData;
+  }
+
+  /**
    * Firebase에 로그인한 유저 정보를 가져오는 함수
    * @returns 로그인 한 유저 정보
    */
   getCurrentUser = () => {
-    const user = this.auth.currentUser;
-    if (user) {
-      return user;
-    } else {
-      return null;
+    onAuthStateChanged(this.auth, (user) => {
+      if (user) {
+        return user;
+      } else {
+        return null;
+      }
     }
-  }
+    );
+  };
 
   // Restaurant Actions --------------
 

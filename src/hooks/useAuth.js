@@ -1,11 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import firebase from "@/services/firebase"
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/redux/slices/userSlice";
 
 const useAuth = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // 페이지 이동을 위한 hook
+  const dispatch = useDispatch(); // Redux dispatch
+
   const [isLoading, setIsLoading] = useState(false); // 로딩 여부
   const [error, setError] = useState(''); // 에러 여부
+
+  useEffect(() => {
+    const unsubscribe = firebase.auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        const userData = await firebase.getUser(user.uid);
+        dispatch(setUser(userData)); // Redux에 유저 정보 저장
+      }
+      setIsLoading(false);
+    });
+    return () => unsubscribe(); // Clean up
+  }, []);
 
   /**
    * 회원가입 폼 제출 시 호출되는 함수
@@ -54,11 +69,12 @@ const useAuth = () => {
   };
 
   const getUser = () => {
-    return firebase.getCurrentUser();
-  }
+    const user = firebase.getCurrentUser(); // Firebase에서 로그인한 유저 정보 가져오기
+    return user;
+  };
 
   return {
-    onFormSignUp, onFormSignIn, getUser, isLoading, error
+    isLoading, error, onFormSignUp, onFormSignIn, getUser
   };
 }
 
