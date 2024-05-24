@@ -34,11 +34,9 @@ const Reviews = ({ name, reviews }) => {
               <p className="mt-1 inline-block rounded-lg bg-red-100 p-2 text-sm">
                 {review.eatenMenu}
               </p>
-              {review.images && ( // 이미지가 존재하면 출력
+              {review.image && ( // 이미지가 존재하면 출력
                   <div className="flex flex-wrap">
-                    {review.images.map((image, index) => (
-                      <img key={index} src={image} alt={review.name} className="h-auto w-32 rounded-xl mr-2.5 mb-2.5" />
-                    ))}
+                    <img key={index} src={image} alt={review.name} className="h-auto w-32 rounded-xl mr-2.5 mb-2.5" />
                   </div>
                 )
               }

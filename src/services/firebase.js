@@ -1,7 +1,7 @@
 import firebaseConfig from "./config"; // Firebase 설정 가져오기
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, setPersistence, browserLocalPersistence, onAuthStateChanged, signOut } from "firebase/auth";
-import { collection, getDocs, getDoc, getFirestore, query, limit, addDoc, updateDoc, doc, where } from "firebase/firestore"; // Firestore 데이터 받아오기
+import { collection, getDocs, getDoc, getFirestore, query, limit, addDoc, updateDoc, doc, where, getDocFromCache } from "firebase/firestore"; // Firestore 데이터 받아오기
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 
 class Firebase {
@@ -166,6 +166,23 @@ class Firebase {
       alert("식당 등록에 실패했습니다.\n다시 시도해주세요.");
     }
   }
+
+  /**
+   * Firestore에서 식당 데이터를 가져오는 함수
+   * @param {String} id 식당 문서 ID
+   * @returns {Object} 식당 데이터
+   */
+  getRestaurant = async (id) => {
+    const restaurantRef = doc(this.db, "restaurant", id);
+    const docSnap = await getDoc(restaurantRef);
+    
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+      return docSnap.data();
+    } else {
+      console.log("No such document!");
+    }
+  };
 
   /**
    * Firestore에 식당 대표 이미지 URL을 업데이트하는 함수

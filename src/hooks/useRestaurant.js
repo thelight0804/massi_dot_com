@@ -44,9 +44,18 @@ const useRestaurant = () => {
     setIsLoading(false);
   }
   
+  /**
+   * Firestore에서 식당 데이터 가져오기
+   * @param {String} id 식당 문서 ID
+   * @returns {Object} 식당 데이터
+   */
+  const getRestaurant = async (id) => {
+    const restaurant = await firebase.getRestaurant(id);
+    return restaurant;
+  }
 
   return {
-    addToRestaurant, isLoading, error
+    isLoading, error, addToRestaurant, getRestaurant
   };
 };
 

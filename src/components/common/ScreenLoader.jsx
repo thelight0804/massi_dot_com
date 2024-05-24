@@ -4,8 +4,8 @@ import FadeLoader from "react-spinners/FadeLoader";
 const ScreenLoader = () => {
   return (
     <div>
-      <div className='fixed top-0 left-0 w-full h-screen bg-black opacity-20' />
-      <div className='fixed top-1/2 left-1/2 w-full h-screen'>
+      <div className='fixed top-0 left-0 w-full h-screen bg-black opacity-20 z-50' />
+      <div className='fixed top-1/2 left-1/2 w-full h-screen z-50'>
         <FadeLoader
           color="#fca5a5"
           height={15}
