@@ -22,51 +22,53 @@ const Navigation = () => {
   }
 
   return (
-    <nav className="mb-3 flex items-center justify-between p-3 font-do-hyeon">
-      <div className="flex items-center space-x-4">
-        <div className="flex h-auto w-24 items-center justify-center">
-          <Link to="/">
-            <img src={logo} alt="logo" />
-          </Link>
+    <div className="fixed bg-white w-full top-0 left-0">
+      <nav className="mb-3 flex items-center justify-between p-3 font-do-hyeon">
+        <div className="flex items-center space-x-4">
+          <div className="flex h-auto w-24 items-center justify-center">
+            <Link to="/">
+              <img src={logo} alt="logo" />
+            </Link>
+          </div>
         </div>
-      </div>
-      <ul className="flex items-center gap-5">
-        {isOwner && (
-          <li>
-            <NavLink className="btn-primary" to={ROUTE.RegisterRestaurant}>
-              가게 등록
-            </NavLink>
-          </li>
-        )}
-        {isLogin ? (
-          <>
+        <ul className="flex items-center gap-5">
+          {isOwner && (
             <li>
-              <NavLink className="btn-link" onClick={handleLogout}>
-                로그아웃
+              <NavLink className="btn-primary" to={ROUTE.RegisterRestaurant}>
+                가게 등록
               </NavLink>
             </li>
-            <li>
-              <NavLink className="btn-link" to={ROUTE.MyPage}>
-                마이 페이지
-              </NavLink>
-            </li>
-          </>
-        ) : (
-          <>
-            <li>
-              <NavLink className="btn-primary" to={ROUTE.SignUp}>
-                회원가입
-              </NavLink>
-            </li>
-            <li>
-              <NavLink className="btn-link" to={ROUTE.SignIn}>
-                로그인
-              </NavLink>
-            </li>
-          </>
-        )}
-      </ul>
-    </nav>
+          )}
+          {isLogin ? (
+            <>
+              <li>
+                <NavLink className="btn-link" onClick={handleLogout}>
+                  로그아웃
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="btn-link" to={ROUTE.MyPage}>
+                  마이 페이지
+                </NavLink>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <NavLink className="btn-primary" to={ROUTE.SignUp}>
+                  회원가입
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="btn-link" to={ROUTE.SignIn}>
+                  로그인
+                </NavLink>
+              </li>
+            </>
+          )}
+        </ul>
+      </nav>
+    </div>
   );
 }
 
