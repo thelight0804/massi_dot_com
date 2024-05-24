@@ -54,7 +54,7 @@ const useAuth = () => {
       const user = await firebase.signIn(values.email, values.password);
       if (user) {
         console.log('Firebase.signIn : ', user);
-        navigate("/"); // 메인 페이지로 이동
+        navigate(-1); // 이전 페이지로 이동
       }
     } catch (error) {
       const errorCode = error.code;

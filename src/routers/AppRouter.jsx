@@ -11,7 +11,7 @@ const AppRouter = () => {
   return (
     <>
       <Navigation />
-      <div className='mt-24'>
+      <div style={{position: 'relative', top:'96px'}}>
         <Routes>
           <Route path={ROUTES.HOME} element={<view.Home />} />
           <Route path={ROUTES.SignUp} element={<view.SignUp />} />
