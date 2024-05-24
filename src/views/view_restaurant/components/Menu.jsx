@@ -1,11 +1,8 @@
 import react from 'react';
 
-const RestaurantMenu = ({ menu, info }) => {
-
-
+const Menu = ({ menu, info }) => {
   return (
     <div className="md:flex md:flex-wrap md:justify-center">  {/*다음 줄 나열, 가운데 배치*/}
-
     {menu.map((item, index) => (
       <div key={index} className="md:w-1/2 md:border md: border-red-100 md:rounded-lg md:max-w-2xl md:mx-2 md:my-2">
         {/*w-1/2:넓이 차지, border: 테두리, rounded: 테두리 모양,
@@ -32,4 +29,4 @@ const RestaurantMenu = ({ menu, info }) => {
   );
 };
 
-export default RestaurantMenu;
+export default Menu;

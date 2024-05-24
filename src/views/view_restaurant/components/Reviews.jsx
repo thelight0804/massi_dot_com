@@ -2,7 +2,7 @@ import React from "react";
 import { IconContext } from "react-icons";
 import { FaStar, FaRegUser } from "react-icons/fa";
 
-const RestaurantReviews = ({ name, reviews }) => {
+const Reviews = ({ name, reviews }) => {
   return (
     <div>
       <div className="ml-1.5 text-2xl font-bold">{name}</div> {/* 가게 이름 */}
@@ -72,4 +72,4 @@ const StarRating = ({ rating }) => {
   return <div className="flex">{stars}</div>;
 };
 
-export default RestaurantReviews;
+export default Reviews;

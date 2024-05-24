@@ -88,6 +88,7 @@ const useAuth = () => {
       navigate("/"); // 메인 페이지로 이동
     } catch (error) {
       console.error('Firebase.signOut: ', error);
+      alert("로그아웃에 실패했습니다.\n 잠시후 다시 시도해주세요.");
     }
   };
 
