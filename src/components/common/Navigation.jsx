@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import * as ROUTE from "@/constants/routes";
-import logo from "@/images/logo-full.png";
 import { useSelector } from "react-redux";
+import logo from "@/images/logo-full.png";
 import useAuth from "@/hooks/useAuth";
 
 const Navigation = () => {
@@ -33,8 +33,8 @@ const Navigation = () => {
       <ul className="flex items-center gap-5">
         {isOwner && (
           <li>
-            <NavLink className="btn-primary" to={ROUTE.RegisterMenu}>
-              메뉴 등록
+            <NavLink className="btn-primary" to={ROUTE.RegisterRestaurant}>
+              가게 등록
             </NavLink>
           </li>
         )}
