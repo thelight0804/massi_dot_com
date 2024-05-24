@@ -3,8 +3,12 @@ import { Routes, Route } from 'react-router-dom';
 import Navigation from '@/components/common/Navigation';
 import * as ROUTES from '@/constants/routes'; // 모든 routes 경로
 import * as view from '@/views'; // 모든 views 경로
+import { useSelector } from 'react-redux';
 
 const AppRouter = () => {
+  const user = useSelector((state) => state.user);
+  console.log(user);
+
   return (
     <>
       <Navigation />
