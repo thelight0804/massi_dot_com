@@ -1,21 +1,26 @@
-import React, { useState } from 'react';
-import { Field, Form, Formik } from 'formik';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
-import ProgressIndicator from '@/components/common/ProgressIndicator';
+import { Field, Form, Formik } from 'formik';
 import { useRestaurant } from '@/hooks';
+import ProgressIndicator from '@/components/common/ProgressIndicator';
 import ScreenLoader from '@/components/common/ScreenLoader';
 
 const RegisterMenu = () => {
+  const user = useSelector((state) => state.user); // Redux store에서 user 정보 가져오기
   var navigate = useNavigate(); // 이전 페이지로 이동하기 위해 사용
   const location = useLocation(); // RegisterRestaurant 페이지에서 전달받은 데이터를 사용하기 위해 사용
-  const { // useRestaurant 훅 사용
-    addToRestaurant,
-    isLoading,
-    error
-  } = useRestaurant();
+  const { addToRestaurant, isLoading, error } = useRestaurant(); // useRestaurant 훅 사용
 
   var restaurantInfo = location.state.restaurantInfo; // RegisterRestaurant 페이지에서 전달받은 데이터
   const [menuItems, setMenuItems] = useState([]); // 메뉴 리스트 초기화
+
+  useEffect(() => {
+    if (!user.uid) {
+      alert('비정상적인 접근입니다. 이전 페이지로 이동합니다.');
+      navigate(-1); // 이전 페이지로 이동
+    }
+  }, [user]);
 
   /**
    * 식당 최종 등록 헨들러

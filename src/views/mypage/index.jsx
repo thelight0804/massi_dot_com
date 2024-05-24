@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 
 const MyPage = () => {
+  const user = useSelector((state) => state.user);
+  var navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user.uid) {
+      alert('비정상적인 접근입니다. 이전 페이지로 이동합니다.');
+      navigate(-1); // 이전 페이지로 이동
+    }
+  }, [user]);
+
   return (
     <div>
       <h1 className="text-2xl font-bold m-4 flex justify-center ">MyPage</h1>

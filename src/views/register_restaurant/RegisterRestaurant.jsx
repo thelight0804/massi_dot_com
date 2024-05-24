@@ -1,11 +1,20 @@
-import React from 'react';
-import ProgressIndicator from '@/components/common/ProgressIndicator';
+import React, { useEffect } from 'react';
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as ROUTE from "@/constants/routes";
 import { Field, Form, Formik } from 'formik';
+import ProgressIndicator from '@/components/common/ProgressIndicator';
 
 const RegisterRestaurant = () => {
   var navigate = useNavigate(); // react-router에서 사용하는 hook
+  const user = useSelector((state) => state.user); // Redux store에서 user 정보 가져오기
+
+  useEffect(() => {
+    if (!user.uid) {
+      alert('비정상적인 접근입니다. 이전 페이지로 이동합니다.');
+      navigate(-1); // 이전 페이지로 이동
+    }
+  }, [user]);
 
   return (
     <div>
