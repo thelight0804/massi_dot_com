@@ -1,8 +1,6 @@
 import react from 'react';
 
-
 const RestaurantMenu = ({ menu, info }) => {
-  console.log(menu, info);
 
 
   return (
