@@ -1,6 +1,6 @@
 import firebaseConfig from "./config"; // Firebase 설정 가져오기
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, setPersistence, browserLocalPersistence, onAuthStateChanged } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, setPersistence, browserLocalPersistence, onAuthStateChanged, signOut } from "firebase/auth";
 import { collection, getDocs, getDoc, getFirestore, query, limit, addDoc, updateDoc, doc, where } from "firebase/firestore"; // Firestore 데이터 받아오기
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 
@@ -43,6 +43,14 @@ class Firebase {
    */
   signIn = async (email, password) => 
     signInWithEmailAndPassword(this.auth, email, password)
+
+  signOut = async () => {
+    try {
+      await signOut(this.auth);
+    } catch (error) {
+      return error;
+    }
+  }
 
   /**
    * Firestore에 유저 데이터를 추가하는 함수

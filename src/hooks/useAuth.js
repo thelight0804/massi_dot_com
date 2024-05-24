@@ -68,13 +68,36 @@ const useAuth = () => {
     setIsLoading(false);
   };
 
+  const onSignOut = async () => {
+    try {
+      await firebase.signOut();
+      
+      // Redux store에서 user 정보 초기화
+      dispatch(setUser({
+        id: null,
+        uid: null,
+        address: null,
+        profileImage: null,
+        isOwner: false,
+        phoneNumber: null,
+        name: null,
+        email: null,
+      }));
+
+      alert("로그아웃 되었습니다.");
+      navigate("/"); // 메인 페이지로 이동
+    } catch (error) {
+      console.error('Firebase.signOut: ', error);
+    }
+  };
+
   const getUser = () => {
     const user = firebase.getCurrentUser(); // Firebase에서 로그인한 유저 정보 가져오기
     return user;
   };
 
   return {
-    isLoading, error, onFormSignUp, onFormSignIn, getUser
+    isLoading, error, onFormSignUp, onFormSignIn, getUser, onSignOut
   };
 }
 
