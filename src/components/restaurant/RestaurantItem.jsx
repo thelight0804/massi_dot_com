@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const RestaurantItem = ({restaurant}) => {
   const navigate = useNavigate();
 
-  const onClickRestaurant = () => {
+  const onClickHandler = () => {
     navigate(ROUTE.ViewRestaurant.replace(":id", restaurant.id), {
       state: { restaurant },
     });
@@ -16,7 +16,7 @@ const RestaurantItem = ({restaurant}) => {
   return (
     <button
       className="flex w-full items-center border-b-2 truncate border-stone-100 hover:bg-red-100 md:border-2 md:m-5 md:w-1/3"
-      onClick={onClickRestaurant}
+      onClick={onClickHandler}
     >
       <img className="h-28 w-28 m-4 rounded-md" src={restaurant.image} alt="restaurant" />
       <div>

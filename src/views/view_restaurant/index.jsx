@@ -25,6 +25,10 @@ const ViewRestaurant = () => {
     setIsLoading(false);
   }, [user])
 
+  const onClickHandler = () => {
+    navigate(ROUTE.WriteReview.replace(":id", restaurant.id));
+  }
+
   if (!restaurant) {
     // FIX: 로그아웃 시 에러 발생
     alert("오류가 발생했습니다. \n 이전 페이지로 이동합니다.");
@@ -92,7 +96,7 @@ const ViewRestaurant = () => {
             {customer && (
               <div className='fixed bottom-0 w-full text-center bg-white'>
                 <div className="h-0.5 bg-gray-300" />
-                <button className="btn-primary m-4 w-4/5" to={ROUTE.RegisterRestaurant}>
+                <button className="btn-primary m-4 w-4/5" onClick={onClickHandler}>
                   리뷰 작성
                 </button>
               </div>
