@@ -4,7 +4,6 @@ import React from 'react';
 const MyPage = () => {
   return (
     <div>
-      <Navigation />
       <h1 className="text-2xl font-bold m-4 flex justify-center ">MyPage</h1>
 
       <div className="relative flex border-8 border-red-100 bg-red-100 p-8">
