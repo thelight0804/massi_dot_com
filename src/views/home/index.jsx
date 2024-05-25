@@ -7,8 +7,7 @@ import Preloader from '@/components/common/Preloader';
 const Home = () => {
   const { // useRestaurants 훅 사용
     restaurants,
-    fetchRestaurants,
-    isLoading: isLoadingRestaurants,
+    isRestaurantsLoading: isLoading,
     error: errorRestaurants } = useRestaurants(50); //TODO: 무한 스크롤 구현 시 개수 제한 수정
 
   return (
@@ -24,7 +23,7 @@ const Home = () => {
       <div>
         {errorRestaurants ? ( // 에러 발생 시
           alert("오류가 발생했습니다. \n 페이지를 새로고침 해주세요.")
-        ) : isLoadingRestaurants ? ( // 로딩 중일 때
+        ) : isLoading ? ( // 로딩 중일 때
             <div className="mt-8">
               <Preloader />
             </div>

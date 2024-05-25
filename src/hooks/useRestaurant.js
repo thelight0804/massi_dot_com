@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const useRestaurant = () => {
   const navigate = useNavigate();
 
-  const [isLoading, setIsLoading] = useState(false); // 로딩 여부
+  const [isRestaurantLoading, setIsRestaurantLoading] = useState(false); // 로딩 여부
   const [error, setError] = useState(''); // 에러 여부
 
   /**
@@ -14,7 +14,7 @@ const useRestaurant = () => {
    * @param {Object} menuItems 등록할 메뉴 리스트
    */
   const addToRestaurant = async (restaurantInfo, menuItems) => {
-    setIsLoading(true); // 로딩 시작
+    setIsRestaurantLoading(true); // 로딩 시작
     try{
       restaurantInfo.menu = menuItems; // 메뉴 리스트 추가
       const id = await firebase.addRestaurant(restaurantInfo); // Firestore에 식당 데이터 추가
@@ -33,15 +33,15 @@ const useRestaurant = () => {
       await firebase.updateRestaurantMenuImage(id, restaurantInfo.menu); // Firestore에 메뉴 이미지 URL 추가
 
       if (id) {
-        setIsLoading(false);
+        setIsRestaurantLoading(false);
         alert("식당 등록이 완료되었습니다.");
         navigate("/"); // 메인 페이지로 이동
       }
     } catch (e) {
-      setIsLoading(false);
+      setIsRestaurantLoading(false);
       setError('식당 데이터를 추가하는데 실패했습니다.');
     }
-    setIsLoading(false);
+    setIsRestaurantLoading(false);
   }
   
   /**
@@ -50,12 +50,14 @@ const useRestaurant = () => {
    * @returns {Object} 식당 데이터
    */
   const getRestaurant = async (id) => {
+    setIsRestaurantLoading(true);
     const restaurant = await firebase.getRestaurant(id);
+    setIsRestaurantLoading(false);
     return restaurant;
   }
 
   return {
-    isLoading, error, addToRestaurant, getRestaurant
+    isRestaurantLoading, error, addToRestaurant, getRestaurant
   };
 };
 

@@ -3,11 +3,7 @@ import { useAuth } from '@/hooks';
 import ScreenLoader from '@/components/common/ScreenLoader';
 
 const SignUp = () => {
-  const {
-    onFormSignUp,
-    isLoading,
-    error
-  } = useAuth();
+  const { onFormSignUp, isAuthLoading: isLoading} = useAuth();
 
   return (
     <div>

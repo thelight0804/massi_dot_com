@@ -3,11 +3,11 @@ import firebase from "@/services/firebase";
 
 /**
  * Firestore에서 식당 데이터를 가져오는 훅
- * @returns {Object} restaurants, fetchRestaurants, isLoading, error
+ * @returns {Object} restaurants, fetchRestaurants, isRestaurantsLoading, error
  */
 const useRestaurants = (itemsCount) => {
   const [restaurants, setRestaurants] = useState([]); // 식당 state
-  const [isLoading, setIsLoading] = useState(true); // 로딩 여부
+  const [isRestaurantsLoading, setIsRestaurantsLoading] = useState(true); // 로딩 여부
   const [error, setError] = useState(''); // 에러 여부
 
   /**
@@ -23,7 +23,7 @@ const useRestaurants = (itemsCount) => {
       if (docs.empty) { // 데이터가 없을 경우
         setError('식당 데이터가 없습니다.');
         console.error(error);
-        setIsLoading(false);
+        setIsRestaurantsLoading(false);
       } else { // 데이터가 있을 경우
         setRestaurants(docs); // 식당 데이터 state에 저장
       }
@@ -31,7 +31,7 @@ const useRestaurants = (itemsCount) => {
       setError('식당 데이터를 불러오는데 실패했습니다.');
       console.error(error);
     }
-    setIsLoading(false); // 로딩 종료
+    setIsRestaurantsLoading(false); // 로딩 종료
   };
 
   // 컴포넌트가 마운트 되었을 때 실행
@@ -40,7 +40,7 @@ const useRestaurants = (itemsCount) => {
   }, []);
 
   return { 
-    restaurants, fetchRestaurants, isLoading, error
+    restaurants, fetchRestaurants, isRestaurantsLoading, error
   };
 };
 

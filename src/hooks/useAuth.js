@@ -8,7 +8,7 @@ const useAuth = () => {
   const navigate = useNavigate(); // 페이지 이동을 위한 hook
   const dispatch = useDispatch(); // Redux dispatch
 
-  const [isLoading, setIsLoading] = useState(false); // 로딩 여부
+  const [isAuthLoading, setIsAuthLoading] = useState(false); // 로딩 여부
   const [error, setError] = useState(''); // 에러 여부
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const useAuth = () => {
         const userData = await firebase.getUser(user.uid);
         dispatch(setUser(userData)); // Redux에 유저 정보 저장
       }
-      setIsLoading(false);
+      setIsAuthLoading(false);
     });
     return () => unsubscribe(); // Clean up
   }, []);
@@ -27,7 +27,7 @@ const useAuth = () => {
    * @param {Object} values Formik에서 전달받은 값
    */
   const onFormSignUp = async (values) => {
-    setIsLoading(true); // 로딩 시작
+    setIsAuthLoading(true); // 로딩 시작
 
     try {
       const user = await firebase.signUp(values);
@@ -41,14 +41,14 @@ const useAuth = () => {
       setError({ errorCode, errorMessage })
       alert("회원가입에 실패했습니다.\n 잠시후 다시 시도해주세요.")
     }
-    setIsLoading(false);
+    setIsAuthLoading(false);
   };
 
   /**
    * 로그인 폼 제출 시 호출되는 함수
    */
   const onFormSignIn = async (values) => {
-    setIsLoading(true);
+    setIsAuthLoading(true);
     
     try {
       const user = await firebase.signIn(values.email, values.password);
@@ -65,7 +65,7 @@ const useAuth = () => {
         alert("로그인에 실패했습니다.\n 잠시후 다시 시도해주세요.");
       }
     }
-    setIsLoading(false);
+    setIsAuthLoading(false);
   };
 
   const onSignOut = async () => {
@@ -98,7 +98,7 @@ const useAuth = () => {
   };
 
   return {
-    isLoading, error, onFormSignUp, onFormSignIn, getUser, onSignOut
+    isAuthLoading, error, onFormSignUp, onFormSignIn, getUser, onSignOut
   };
 }
 

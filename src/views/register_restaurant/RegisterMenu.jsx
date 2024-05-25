@@ -10,7 +10,7 @@ const RegisterMenu = () => {
   const user = useSelector((state) => state.user); // Redux store에서 user 정보 가져오기
   var navigate = useNavigate(); // 이전 페이지로 이동하기 위해 사용
   const location = useLocation(); // RegisterRestaurant 페이지에서 전달받은 데이터를 사용하기 위해 사용
-  const { addToRestaurant, isLoading, error } = useRestaurant(); // useRestaurant 훅 사용
+  const { addToRestaurant, isRestaurantLoading: isLoading } = useRestaurant(); // useRestaurant 훅 사용
 
   var restaurantInfo = location.state.restaurantInfo; // RegisterRestaurant 페이지에서 전달받은 데이터
   const [menuItems, setMenuItems] = useState([]); // 메뉴 리스트 초기화

@@ -90,7 +90,7 @@ const ViewRestaurant = () => {
         ),
         tabCont: (
           <>
-            <div className={customer ? 'mb-20' : ''}>
+            <div className={customer ? 'mb-44' : ''}>
               <Reviews name={restaurant.name} reviews={restaurant.reviews} />
             </div>
             {customer && (

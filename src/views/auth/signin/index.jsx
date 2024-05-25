@@ -5,10 +5,7 @@ import { useAuth } from '@/hooks';
 import ScreenLoader from '@/components/common/ScreenLoader';
 
 const SignIn = () => {
-  const {
-    onFormSignIn,
-    isLoading,
-  } = useAuth();
+  const { onFormSignIn, isAuthLoading: isLoading } = useAuth();
 
   return (
     <div>
