@@ -1,7 +1,7 @@
 import React from "react";
 import { IconContext } from "react-icons";
 import { FaStar, FaRegUser } from "react-icons/fa";
-
+// TODO: 식당 정보를 firebase에서 가져오기
 const Reviews = ({ name, reviews }) => {
   return (
     <div>
@@ -35,9 +35,14 @@ const Reviews = ({ name, reviews }) => {
                 {review.eatenMenu}
               </p>
               {review.image && ( // 이미지가 존재하면 출력
-                  <div className="flex flex-wrap">
-                    <img key={index} src={image} alt={review.name} className="h-auto w-32 rounded-xl mr-2.5 mb-2.5" />
-                  </div>
+                <div className="flex flex-wrap">
+                  <img
+                    key={index}
+                    src={review.image}
+                    alt="음식 이미지"
+                    className="h-auto w-32 rounded-xl m-2"
+                  />
+                </div>
                 )
               }
             </div>

@@ -22,6 +22,7 @@ const useRestaurant = () => {
       // 식당 대표 이미지 저장
       const mainImageUrl = await firebase.storeImage(restaurantInfo.image, `restaurants/${id}/main/`);
       firebase.updateRestaurantMainImage(id, mainImageUrl); // Firestore에 이미지 URL 추가
+      restaurantInfo.image = mainImageUrl; // 이미지 URL 추가
 
       // 메뉴 이미지 저장
       // forEach는 비동기 처리가 안되므로 for문 사용

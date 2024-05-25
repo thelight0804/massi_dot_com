@@ -12,7 +12,7 @@ const ViewRestaurant = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const restaurant = state.restaurant; // 레스토랑 정보
-  const [customer, setCustomer] = useState(false); // 손님 여부
+  const [customer, setCustomer] = useState(false); // 식당 관계자 여부
   const [isLoading, setIsLoading] = useState(true); // 로딩 여부
   const [activeIndex, setActiveIndex] = useState(0); // 탭 인덱스
 
@@ -90,9 +90,16 @@ const ViewRestaurant = () => {
         ),
         tabCont: (
           <>
-            <div className={customer ? 'mb-44' : ''}>
-              <Reviews name={restaurant.name} reviews={restaurant.reviews} />
-            </div>
+            {restaurant.reviews ? (
+              <div className={customer ? 'mb-44' : ''}>
+                <Reviews name={restaurant.name} reviews={restaurant.reviews} />
+              </div>
+            ) : (
+              <div className="text-center mt-4 font-re text-gray-700">
+                <p>아직 등록된 리뷰가 없어요!</p>
+                <p>첫 번째로 리뷰를 작성해 보세요.</p>
+              </div>
+            )}
             {customer && (
               <div className='fixed bottom-0 w-full text-center bg-white'>
                 <div className="h-0.5 bg-gray-300" />

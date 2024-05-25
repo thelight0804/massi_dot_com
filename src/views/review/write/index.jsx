@@ -17,15 +17,14 @@ const WriteReview = () => {
   const [menus, setMenus] = useState([]); // 식당 메뉴
 
   useEffect(() => {
-    // if (!user.uid) {
-    //   alert('비정상적인 접근입니다. 이전 페이지로 이동합니다.');
-    //   navigate(-1); // 이전 페이지로 이동
-    // }
+    if (!user.uid) {
+      alert('비정상적인 접근입니다. 이전 페이지로 이동합니다.');
+      navigate(-1); // 이전 페이지로 이동
+    }
   }, [user]);
 
   useEffect(() => {
     const fetchRestaurant = async () => {
-      // setIsLoading(true);
       const restaurant = await getRestaurant(id);
       if (restaurant) {
         setMenus(restaurant.menu);
@@ -33,7 +32,6 @@ const WriteReview = () => {
         alert("식당 정보를 가져오는데 실패했습니다.");
         navigate(-1); // 메인 페이지로 이동
       }
-      // setIsLoading(false);
     }
     fetchRestaurant();
   }, []);
