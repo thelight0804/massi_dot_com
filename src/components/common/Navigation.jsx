@@ -34,7 +34,7 @@ const Navigation = () => {
         <ul className="flex items-center gap-5">
           {isOwner && (
             <li>
-              <NavLink className="btn-primary" to={ROUTE.RegisterRestaurant}>
+              <NavLink className="btn-primary text-sm md:text-base" to={ROUTE.RegisterRestaurant}>
                 가게 등록
               </NavLink>
             </li>

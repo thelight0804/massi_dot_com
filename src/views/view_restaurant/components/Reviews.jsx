@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { IconContext } from "react-icons";
 import { FaStar, FaRegUser } from "react-icons/fa";
+import ReplyForm from "./replyForm";
 
-const Reviews = ({ name, reviews }) => {
+const Reviews = ({ name, reviews, isOwner, restaurantId }) => {
+  var [reviewIndex, setReviewIndex] = useState(0); // 리뷰 목록의 인덱스
+  var [modal, setModal] = useState(false); // 모달 창의 상태
+
+  const onClickReplyHandler = (index) => {
+    setReviewIndex(index);
+    modal ? setModal(false) : setModal(true);
+  }
+
   return (
     <div>
       <div className="ml-1.5 text-2xl font-bold">{name}</div> {/* 가게 이름 */}
@@ -35,11 +44,39 @@ const Reviews = ({ name, reviews }) => {
                 {review.eatenMenu}
               </p>
               {review.image && ( // 이미지가 존재하면 출력
-                  <div className="flex flex-wrap">
-                    <img key={index} src={image} alt={review.name} className="h-auto w-32 rounded-xl mr-2.5 mb-2.5" />
-                  </div>
+                <div className="flex flex-wrap">
+                  <img
+                    key={index}
+                    src={review.image}
+                    alt="음식 이미지"
+                    className="h-auto w-32 rounded-xl m-2"
+                  />
+                </div>
                 )
               }
+              {isOwner && (
+                <div className="flex justify-end">
+                  <button
+                    className="btn-primary text-sm px-2 py-2"
+                    onClick={() => onClickReplyHandler(index)}
+                  >
+                    답글 달기
+                  </button>
+                </div>
+              )}
+              {modal && reviewIndex === index && (
+                <div className="mt-4">
+                  <ReplyForm
+                    reviewIndex={reviewIndex}
+                    restaurantName={name}
+                    restaurantId={restaurantId}
+                    userName={review.userName}
+                    content={review.content}
+                    setModal={setModal}
+                    eatenMenu={review.eatenMenu}
+                  />
+                </div>
+              )}
             </div>
             {review.reply && ( // 답글이 존재하면 출력
               <div className="rounded-lg bg-orange-100 p-4 ml-8 mr-4 text-sm">

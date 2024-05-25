@@ -17,15 +17,14 @@ const WriteReview = () => {
   const [menus, setMenus] = useState([]); // 식당 메뉴
 
   useEffect(() => {
-    // if (!user.uid) {
-    //   alert('비정상적인 접근입니다. 이전 페이지로 이동합니다.');
-    //   navigate(-1); // 이전 페이지로 이동
-    // }
+    if (!user.uid) {
+      alert('비정상적인 접근입니다. 이전 페이지로 이동합니다.');
+      navigate(-1); // 이전 페이지로 이동
+    }
   }, [user]);
 
   useEffect(() => {
     const fetchRestaurant = async () => {
-      // setIsLoading(true);
       const restaurant = await getRestaurant(id);
       if (restaurant) {
         setMenus(restaurant.menu);
@@ -33,7 +32,6 @@ const WriteReview = () => {
         alert("식당 정보를 가져오는데 실패했습니다.");
         navigate(-1); // 메인 페이지로 이동
       }
-      // setIsLoading(false);
     }
     fetchRestaurant();
   }, []);
@@ -111,6 +109,9 @@ const WriteReview = () => {
                     className="w-full border py-2 text-center"
                   />
                 </div>
+              </div>
+              <div className="bg-gray-100 w-0.5 mx-2" />
+              <div className='md:w-1/3 md:relative'>
                 <div className="text-center">
                   <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="content">
                     가게에 대한 리뷰를 작성해주세요.
@@ -143,10 +144,7 @@ const WriteReview = () => {
                     }}
                   />
                 </div>
-              </div>
-              <div className="bg-gray-100 w-0.5 mx-2" />
-              <div className='md:w-1/3 md:relative'>
-                <div className='block md:space-x-0 md:absolute md:inset-x-0 md:bottom-0'>
+                <div className='block'>
                   <button
                     type="button"
                     className="btn-gray w-full mt-4"

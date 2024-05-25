@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import firebase from "@/services/firebase"
+import firebase from "@/services/firebase/firebase"
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/redux/slices/userSlice";
