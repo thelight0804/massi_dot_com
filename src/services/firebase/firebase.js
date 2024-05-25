@@ -73,7 +73,7 @@ class Firebase {
         profileImage: null, // 프로필 이미지 URL은 null로 초기화
         isOwner: values.isOwner,
       });
-      console.log("Document written with ID: ", docRef.id);
+      console.log("Document user written with ID: ", docRef.id);
       return docRef.id;
     } catch (e) {
       console.error('Firebase.addUser: ', e);
@@ -159,7 +159,7 @@ class Firebase {
         menu: menu, // 이미지를 제거한 메뉴 데이터 추가
         uid: value.uid, // 사용자 ID 추가
       });
-      console.log("Document written with ID: ", docRef.id); // 등록된 식당 ID 출력
+      console.log("Document restaurant written with ID: ", docRef.id); // 등록된 식당 ID 출력
       return docRef.id; // 등록된 식당 ID 반환
     } catch (e) {
       console.error('Firebase.setRestaurant: ', e);
@@ -219,6 +219,7 @@ class Firebase {
   }
 
   // Review Actions --------------
+
   /**
    * Firestore에 리뷰 데이터를 추가하는 함수
    * @param {Object} value 리뷰 데이터
@@ -240,10 +241,35 @@ class Firebase {
         console.log("No such document!");
       }
 
-      console.log("Document written with ID: ", washingtonRef.id); // 등록된 식당 ID 출력
+      console.log("Document review written with ID: ", washingtonRef.id); // 등록된 식당 ID 출력
     } catch (e) {
       console.error('Firebase.setRestaurant: ', e);
       alert("식당 등록에 실패했습니다.\n다시 시도해주세요.");
+    }
+  }
+
+  addReply = async (content, restaurantId, reviewIndex) => {
+    try {
+      // Firestore에 리뷰 데이터 갱신(추가)
+      const washingtonRef = doc(this.db, "restaurant", restaurantId);
+      const docSnap = await getDoc(washingtonRef);
+
+      if (docSnap.exists()) {
+        const restaurant = docSnap.data();
+        const reviews = restaurant.reviews ? [...restaurant.reviews] : [];
+        reviews[reviewIndex].reply = content;
+        await updateDoc(washingtonRef, {
+          reviews: reviews,
+        });
+        console.log("Document reply written with ID: ", washingtonRef.id); // 등록된 식당 ID 출력
+        alert("답글이 등록되었습니다.");
+      } else {
+        console.log("No such document!");
+      }
+    } catch (e) {
+      console.error('Firebase.addReply: ', e);
+      alert("답글 등록에 실패했습니다.\n다시 시도해주세요.");
+      return e;
     }
   }
 

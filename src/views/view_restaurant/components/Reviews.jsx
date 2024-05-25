@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { IconContext } from "react-icons";
 import { FaStar, FaRegUser } from "react-icons/fa";
-// TODO: 식당 정보를 firebase에서 가져오기
-const Reviews = ({ name, reviews }) => {
+import ReplyForm from "./replyForm";
+
+const Reviews = ({ name, reviews, isOwner, restaurantId }) => {
+  var [reviewIndex, setReviewIndex] = useState(0); // 리뷰 목록의 인덱스
+  var [modal, setModal] = useState(false); // 모달 창의 상태
+
+  const onClickReplyHandler = (index) => {
+    setReviewIndex(index);
+    modal ? setModal(false) : setModal(true);
+  }
+
   return (
     <div>
       <div className="ml-1.5 text-2xl font-bold">{name}</div> {/* 가게 이름 */}
@@ -45,6 +54,21 @@ const Reviews = ({ name, reviews }) => {
                 </div>
                 )
               }
+              {isOwner && (
+                <div className="flex justify-end">
+                  <button
+                    className="btn-primary text-sm px-2 py-2"
+                    onClick={() => onClickReplyHandler(index)}
+                  >
+                    답글 달기
+                  </button>
+                </div>
+              )}
+              {modal && reviewIndex === index && (
+                <div className="mt-4">
+                  <ReplyForm reviewIndex={reviewIndex} restaurantName={name} restaurantId={restaurantId} userName={review.userName} content={review.content} setModal={setModal} />
+                </div>
+              )}
             </div>
             {review.reply && ( // 답글이 존재하면 출력
               <div className="rounded-lg bg-orange-100 p-4 ml-8 mr-4 text-sm">

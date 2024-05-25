@@ -6,6 +6,11 @@ const useReview = () => {
   const navigate = useNavigate();
   const [isReviewLoading, setIsReviewLoading] = useState(false);
 
+  /**
+   * Firestore에 리뷰 추가
+   * @param {Object} review 리뷰 데이터
+   * @returns {Promise<string>} 리뷰 ID
+   */
   const addReview = async (review) => {
     setIsReviewLoading(true);
     try {
@@ -34,7 +39,15 @@ const useReview = () => {
     }
   }
 
-  return { isReviewLoading, addReview };
+  /**
+   * Firestore에 답글 추가
+   * @param {Object} reply 답글 데이터
+   */
+  const addReply = async (reply) => {
+    await firebase.addReply(reply.content, reply.restaurantId, reply.reviewIndex);
+  }
+
+  return { isReviewLoading, addReview, addReply };
 };
 
 export default useReview;

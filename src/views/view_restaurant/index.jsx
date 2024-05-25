@@ -14,20 +14,12 @@ const ViewRestaurant = () => {
   const { id } = useParams();
   const { getRestaurant, isRestaurantLoading } = useRestaurant(); // useRestaurant 훅 사용
   const [restaurant, setRestaurant] = useState(null); // 식당 정보
-  const [customer, setCustomer] = useState(false); // 식당 관계자 여부
+  const [isOwner, setIsOwner] = useState(false); // 식당 관계자 여부
   const [isLoading, setIsLoading] = useState(true); // 로딩 여부
   const [activeIndex, setActiveIndex] = useState(0); // 탭 인덱스
 
-  const tabClickHandler = (index) => {
-    setActiveIndex(index);
-  };
-
   useEffect(() => {
-    user.uid && !user.isOwner && setCustomer(true);
-    setIsLoading(false);
-  }, [user])
-
-  useEffect(() => {
+    // 식당 정보를 가져오는 함수
     const fetchRestaurant = async () => {
       const restaurant = await getRestaurant(id);
       if (restaurant) {
@@ -39,6 +31,18 @@ const ViewRestaurant = () => {
     }
     fetchRestaurant();
   }, []);
+
+  useEffect(() => {
+    // 로그인한 사용자와 식당의 관계를 확인
+    if (restaurant && user) {
+      user.uid === restaurant.uid && setIsOwner(true);
+      setIsLoading(false);
+    }
+  }, [user, restaurant])
+
+  const tabClickHandler = (index) => {
+    setActiveIndex(index);
+  };
 
   const onClickHandler = () => {
     navigate(ROUTE.WriteReview.replace(":id", id));
@@ -102,8 +106,8 @@ const ViewRestaurant = () => {
         tabCont: (
           <>
             {restaurant.reviews ? (
-              <div className={customer ? 'mb-44 md:mb-0' : ''}>
-                <Reviews name={restaurant.name} reviews={restaurant.reviews} />
+              <div className={(!isOwner && user.uid) ? 'mb-44 md:mb-0' : ''}>
+                <Reviews name={restaurant.name} reviews={restaurant.reviews} restaurantId={id} isOwner={isOwner} />
               </div>
             ) : (
               <div className="text-center mt-4 font-re text-gray-700">
@@ -111,7 +115,7 @@ const ViewRestaurant = () => {
                 <p>첫 번째로 리뷰를 작성해 보세요.</p>
               </div>
             )}
-            {customer && (
+            {(!isOwner && user.uid) && (
               <div className='fixed bottom-0 w-full text-center md:text-right bg-white md:bg-transparent'>
                 <div className="h-0.5 bg-gray-300 md:hidden" />
                 <button className="btn-primary m-4 w-4/5 md:w-36" onClick={onClickHandler}>
