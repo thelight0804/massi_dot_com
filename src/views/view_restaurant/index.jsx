@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as ROUTE from "@/constants/routes";
+import useRestaurant from '@/hooks/useRestaurant';
 import Infomation from '@/views/view_restaurant/components/Infomation';
 import Menu from '@/views/view_restaurant/components/Menu';
 import Reviews from '@/views/view_restaurant/components/Reviews';
@@ -9,9 +10,10 @@ import Preloader from '@/components/common/Preloader';
 
 const ViewRestaurant = () => {
   const user = useSelector((state) => state.user);
-  const { state } = useLocation();
   const navigate = useNavigate();
-  const restaurant = state.restaurant; // 레스토랑 정보
+  const { id } = useParams();
+  const { getRestaurant, isRestaurantLoading } = useRestaurant(); // useRestaurant 훅 사용
+  const [restaurant, setRestaurant] = useState(null); // 식당 정보
   const [customer, setCustomer] = useState(false); // 식당 관계자 여부
   const [isLoading, setIsLoading] = useState(true); // 로딩 여부
   const [activeIndex, setActiveIndex] = useState(0); // 탭 인덱스
@@ -25,15 +27,24 @@ const ViewRestaurant = () => {
     setIsLoading(false);
   }, [user])
 
+  useEffect(() => {
+    const fetchRestaurant = async () => {
+      const restaurant = await getRestaurant(id);
+      if (restaurant) {
+        setRestaurant(restaurant);
+      } else {
+        alert("식당 정보를 가져오는데 실패했습니다.");
+        navigate(-1); // 메인 페이지로 이동
+      }
+    }
+    fetchRestaurant();
+  }, []);
+
   const onClickHandler = () => {
-    navigate(ROUTE.WriteReview.replace(":id", restaurant.id));
+    navigate(ROUTE.WriteReview.replace(":id", id));
   }
 
-  if (!restaurant) {
-    // FIX: 로그아웃 시 에러 발생
-    alert("오류가 발생했습니다. \n 이전 페이지로 이동합니다.");
-    navigate(-1);
-  } else if (isLoading) {
+  if (isLoading || isRestaurantLoading) {
     return (
       <div className="mt-8">
         <Preloader />
@@ -91,7 +102,7 @@ const ViewRestaurant = () => {
         tabCont: (
           <>
             {restaurant.reviews ? (
-              <div className={customer ? 'mb-44' : ''}>
+              <div className={customer ? 'mb-44 md:mb-0' : ''}>
                 <Reviews name={restaurant.name} reviews={restaurant.reviews} />
               </div>
             ) : (
@@ -101,9 +112,9 @@ const ViewRestaurant = () => {
               </div>
             )}
             {customer && (
-              <div className='fixed bottom-0 w-full text-center bg-white'>
-                <div className="h-0.5 bg-gray-300" />
-                <button className="btn-primary m-4 w-4/5" onClick={onClickHandler}>
+              <div className='fixed bottom-0 w-full text-center md:text-right bg-white md:bg-transparent'>
+                <div className="h-0.5 bg-gray-300 md:hidden" />
+                <button className="btn-primary m-4 w-4/5 md:w-36" onClick={onClickHandler}>
                   리뷰 작성
                 </button>
               </div>

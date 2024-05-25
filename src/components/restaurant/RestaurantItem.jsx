@@ -8,9 +8,7 @@ const RestaurantItem = ({restaurant}) => {
   const navigate = useNavigate();
 
   const onClickHandler = () => {
-    navigate(ROUTE.ViewRestaurant.replace(":id", restaurant.id), {
-      state: { restaurant },
-    });
+    navigate(ROUTE.ViewRestaurant.replace(":id", restaurant.id));
   };
 
   return (

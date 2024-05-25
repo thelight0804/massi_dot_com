@@ -109,6 +109,9 @@ const WriteReview = () => {
                     className="w-full border py-2 text-center"
                   />
                 </div>
+              </div>
+              <div className="bg-gray-100 w-0.5 mx-2" />
+              <div className='md:w-1/3 md:relative'>
                 <div className="text-center">
                   <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="content">
                     가게에 대한 리뷰를 작성해주세요.
@@ -141,10 +144,7 @@ const WriteReview = () => {
                     }}
                   />
                 </div>
-              </div>
-              <div className="bg-gray-100 w-0.5 mx-2" />
-              <div className='md:w-1/3 md:relative'>
-                <div className='block md:space-x-0 md:absolute md:inset-x-0 md:bottom-0'>
+                <div className='block'>
                   <button
                     type="button"
                     className="btn-gray w-full mt-4"
