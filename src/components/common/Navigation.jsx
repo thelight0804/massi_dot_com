@@ -4,7 +4,6 @@ import * as ROUTE from "@/constants/routes";
 import { useSelector } from "react-redux";
 import logo from "@/images/logo-full.png";
 import useAuth from "@/hooks/useAuth";
-import useGemini from "@/hooks/useGemini";
 
 const Navigation = () => {
   const user = useSelector((state) => state.user); // Redux store에서 user 정보 가져오기

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import firebase from "@/services/firebase";
+import firebase from "@/services/firebase/firebase";
 
 /**
  * Firestore에서 식당 데이터를 가져오는 훅
