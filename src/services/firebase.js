@@ -218,6 +218,44 @@ class Firebase {
     }
   }
 
+  // Review Actions --------------
+  /**
+   * Firestore에 리뷰 데이터를 추가하는 함수
+   * @param {Object} value 리뷰 데이터
+   * @returns {String} docRef.id 등록된 식당 ID
+   */
+  addReview = async (value) => {
+    try {
+      // 리뷰 데이터에 이미지 제거
+      value.image = null;
+      value.profileImage = null;
+
+      // Firestore에 리뷰 데이터 갱신(추가)
+      const washingtonRef = doc(this.db, "restaurant", value.restaurantId);
+      const docSnap = await getDoc(washingtonRef);
+      
+      if (docSnap.exists()) {
+        const restaurant = docSnap.data();
+        const reviews = restaurant.reviews ? [...restaurant.reviews, value] : [value];
+        await updateDoc(washingtonRef, {
+          reviews: reviews,
+        });
+      } else {
+        console.log("No such document!");
+      }
+
+      console.log("Document written with ID: ", washingtonRef.id); // 등록된 식당 ID 출력
+    } catch (e) {
+      console.error('Firebase.setRestaurant: ', e);
+      alert("식당 등록에 실패했습니다.\n다시 시도해주세요.");
+    }
+  }
+
+
+
+
+
+
   // Storage Actions --------------
 
   /**
