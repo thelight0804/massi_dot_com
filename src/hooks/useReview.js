@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import firebase from "@/services/firebase/firebase"
 import { useNavigate } from "react-router-dom";
 
@@ -44,7 +44,10 @@ const useReview = () => {
    * @param {Object} reply 답글 데이터
    */
   const addReply = async (reply) => {
+    setIsReviewLoading(true);
     await firebase.addReply(reply.content, reply.restaurantId, reply.reviewIndex);
+    setIsReviewLoading(false);
+    location.reload(); // 페이지 새로고침 FIXME: 리팩토링 필요
   }
 
   return { isReviewLoading, addReview, addReply };

@@ -66,7 +66,15 @@ const Reviews = ({ name, reviews, isOwner, restaurantId }) => {
               )}
               {modal && reviewIndex === index && (
                 <div className="mt-4">
-                  <ReplyForm reviewIndex={reviewIndex} restaurantName={name} restaurantId={restaurantId} userName={review.userName} content={review.content} setModal={setModal} />
+                  <ReplyForm
+                    reviewIndex={reviewIndex}
+                    restaurantName={name}
+                    restaurantId={restaurantId}
+                    userName={review.userName}
+                    content={review.content}
+                    setModal={setModal}
+                    eatenMenu={review.eatenMenu}
+                  />
                 </div>
               )}
             </div>

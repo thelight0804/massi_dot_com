@@ -7,6 +7,7 @@ import Infomation from '@/views/view_restaurant/components/Infomation';
 import Menu from '@/views/view_restaurant/components/Menu';
 import Reviews from '@/views/view_restaurant/components/Reviews';
 import Preloader from '@/components/common/Preloader';
+import useReview from '@/hooks/useReview';
 
 const ViewRestaurant = () => {
   const user = useSelector((state) => state.user);
