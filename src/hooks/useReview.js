@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import firebase from "@/services/firebase/firebase"
 import { useNavigate } from "react-router-dom";
+import firebase from "@/services/firebase/firebase"
+import clova from "@/services/clova/clova"
 
 const useReview = () => {
   const navigate = useNavigate();
@@ -50,7 +51,11 @@ const useReview = () => {
     location.reload(); // 페이지 새로고침 FIXME: 리팩토링 필요
   }
 
-  return { isReviewLoading, addReview, addReply };
+  const sentimentAnalysis = async (text) => {
+    return await clova.sentimentAnalysis(text);
+  }
+
+  return { isReviewLoading, addReview, addReply, sentimentAnalysis };
 };
 
 export default useReview;
