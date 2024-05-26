@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import firebase from "@/services/firebase/firebase"
 import { useNavigate } from "react-router-dom";
+import firebase from "@/services/firebase/firebase"
+import clova from "@/services/clova/clova"
 
 const useReview = () => {
   const navigate = useNavigate();
@@ -39,6 +41,20 @@ const useReview = () => {
     }
   }
 
+  const deleteReview = async (restaurantId, reviewIndex) => {
+    setIsReviewLoading(true);
+    try {
+      await firebase.deleteReview(restaurantId, reviewIndex);
+      alert("리뷰가 삭제되었습니다.");
+      location.reload();
+    } catch (e) {
+      alert("리뷰 삭제에 실패했습니다.\n다시 시도해주세요.");
+      return e;
+    } finally {
+      setIsReviewLoading(false);
+    }
+  }
+
   /**
    * Firestore에 답글 추가
    * @param {Object} reply 답글 데이터
@@ -50,7 +66,16 @@ const useReview = () => {
     location.reload(); // 페이지 새로고침 FIXME: 리팩토링 필요
   }
 
-  return { isReviewLoading, addReview, addReply };
+  /**
+   * 텍스트 감정 분석
+   * @param {String} text 감정을 분석할 텍스트
+   * @returns {Promise<Object>} 감정 분석 결과
+   */
+  const sentimentAnalysis = async (text) => {
+    return await clova.sentimentAnalysis(text);
+  }
+
+  return { isReviewLoading, addReview, addReply, deleteReview, sentimentAnalysis };
 };
 
 export default useReview;

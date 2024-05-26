@@ -17,9 +17,9 @@ const RegisterRestaurant = () => {
   }, [user]);
 
   return (
-    <div>
+    <div className="m-4 mx-auto md:w-4/5">
       <ProgressIndicator currentPage="restaurant" />
-      <div className="mx-auto m-4 w-1/2 border p-4">
+      <div className="m-4 mb-0 border p-4">
         <h3 className="my-4 text-center text-xl font-bold">식당 등록</h3>
         <Formik
           initialValues={{

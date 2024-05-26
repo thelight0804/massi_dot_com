@@ -8,9 +8,9 @@ const SignIn = () => {
   const { onFormSignIn, isAuthLoading: isLoading } = useAuth();
 
   return (
-    <div>
+    <div className="m-4 mx-auto md:w-4/5">
       {isLoading && <ScreenLoader />}
-      <div className="m-4 mx-auto mb-0 w-1/2 border p-4">
+      <div className="m-4 mb-0 border p-4">
         <h3 className="my-4 text-center text-xl font-bold">로그인</h3>
         <Formik
           initialValues={{
@@ -71,7 +71,7 @@ const SignIn = () => {
           )}
         </Formik>
       </div>
-      <div className="mx-auto w-1/2 border bg-gray-100 p-4 text-center">
+      <div className="m-4 mt-0 border bg-gray-100 p-4 text-center">
         <div className="flex justify-center items-center">
           <p className="text-xs font-bold text-gray-700 mr-8">계정이 없으신가요?</p>
           <NavLink
