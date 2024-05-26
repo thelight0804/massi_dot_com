@@ -27,21 +27,31 @@ const useAuth = () => {
    * @param {Object} values Formik에서 전달받은 값
    */
   const onFormSignUp = async (values) => {
-    setIsAuthLoading(true); // 로딩 시작
-
+    setIsAuthLoading(true);
     try {
-      const user = await firebase.signUp(values);
-      if (user) {
-        alert("회원가입이 완료되었습니다.");
-        navigate("/"); // 메인 페이지로 이동
+      // 회원가입 요청
+      const uid = await firebase.signUp(values);
+      values.uid = uid;
+
+      // 프로필 이미지 저장
+      if (values.profileImage) {
+        const profileImageUrl = await firebase.storeImage(values.profileImage, `users/${values.uid}/profile`);
+        values.profileImage = profileImageUrl;
       }
+
+      // firestore에 사용자 데이터 저장
+      await firebase.addUser(values);
+
+      alert("회원가입이 완료되었습니다.");
+      navigate("/"); // 메인 페이지로 이동
     } catch(error) {
       const errorCode = error.code;
       const errorMessage = error.message;
       setError({ errorCode, errorMessage })
       alert("회원가입에 실패했습니다.\n 잠시후 다시 시도해주세요.")
+    } finally {
+      setIsAuthLoading(false);
     }
-    setIsAuthLoading(false);
   };
 
   /**
@@ -68,6 +78,9 @@ const useAuth = () => {
     setIsAuthLoading(false);
   };
 
+  /**
+   * 로그아웃 함수
+   */
   const onSignOut = async () => {
     try {
       await firebase.signOut();
@@ -92,13 +105,44 @@ const useAuth = () => {
     }
   };
 
+  const profileUpdate = async (values) => {
+    setIsAuthLoading(true);
+    try {
+      // 프로필 이미지 저장
+      if (values.profileImage) {
+        const profileImageUrl = await firebase.storeImage(values.profileImage, `users/${values.uid}/profile`);
+        values.profileImage = profileImageUrl;
+      }
+
+      // 사용자 데이터 업데이트
+      await firebase.updateUser(values);
+
+      alert("프로필이 수정되었습니다.");
+      navigate(-1); // 이전 페이지로 이동
+    } catch (e) {
+      return e;
+    } finally {
+      setIsAuthLoading(false);
+    }
+  };
+
+  /**
+   * 로그인한 유저 정보 가져오기
+   * @returns 로그인한 유저 정보
+   */
   const getUser = () => {
     const user = firebase.getCurrentUser(); // Firebase에서 로그인한 유저 정보 가져오기
     return user;
   };
 
   return {
-    isAuthLoading, error, onFormSignUp, onFormSignIn, getUser, onSignOut
+    isAuthLoading,
+    error,
+    onFormSignUp,
+    onFormSignIn,
+    profileUpdate,
+    getUser,
+    onSignOut,
   };
 }
 

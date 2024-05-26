@@ -1,7 +1,7 @@
 import firebaseConfig from "./config"; // Firebase 설정 가져오기
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, setPersistence, browserLocalPersistence, onAuthStateChanged, signOut } from "firebase/auth";
-import { collection, getDocs, getDoc, getFirestore, query, limit, addDoc, updateDoc, doc, where, getDocFromCache } from "firebase/firestore"; // Firestore 데이터 받아오기
+import { collection, getDocs, getDoc, getFirestore, query, limit, addDoc, updateDoc, doc, where, setDoc } from "firebase/firestore"; // Firestore 데이터 받아오기
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 
 class Firebase {
@@ -25,11 +25,7 @@ class Firebase {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log('firebase.signUp : ', user);
-
-        // Firestore에 사용자 데이터 추가
-        this.addUser(user.uid, values);
-
-        return user;
+        return user.uid;
       })
       .catch((error) => {
         return error;
@@ -62,21 +58,45 @@ class Firebase {
    * @param {Object} values 유저 데이터
    * @returns 
    */
-  addUser = async (uid, values) => {
+  addUser = async (values) => {
     try {
-      const docRef = await addDoc(collection(this.db, "users"), {
-        uid: uid,
+      setDoc(doc(this.db, "users", values.uid), {
+        uid: values.uid,
         email: values.email,
         name: values.name,
         phoneNumber: values.phoneNumber,
         address: values.address,
-        profileImage: null, // 프로필 이미지 URL은 null로 초기화
+        profileImage: values.profileImage, // 프로필 이미지 URL은 null로 초기화
         isOwner: values.isOwner,
       });
-      console.log("Document user written with ID: ", docRef.id);
-      return docRef.id;
+      console.log("Document user written with ID: ", values.uid);
     } catch (e) {
       console.error('Firebase.addUser: ', e);
+    }
+  }
+
+  updateUser = async (values) => {
+    try {
+      const washingtonRef = doc(this.db, "users", values.uid);
+      const docSnap = await getDoc(washingtonRef);
+      console.log(values.uid)
+      console.log(washingtonRef)
+      console.log(docSnap)
+      
+      if (docSnap.exists()) {
+        await updateDoc(washingtonRef, {
+          name: values.name,
+          phoneNumber: values.phoneNumber,
+          address: values.address,
+          profileImage: values.profileImage,
+          email: values.email,
+        });
+      } else {
+        console.log("No such document!");
+      }
+    } catch (e) {
+      console.error('Firebase.updateProfile: ', e);
+      alert("프로필 수정에 실패했습니다.\n다시 시도해주세요.");
     }
   }
 
@@ -148,7 +168,6 @@ class Firebase {
     try {
       // 메뉴 데이터에 이미지 제거
       var menu = value.menu.map(item => ({ ...item, image: null }));
-      console.log('value.uid: ', value.uid);
 
       // Firestore에 식당 데이터 추가
       const docRef = await addDoc(collection(this.db, "restaurant"), {

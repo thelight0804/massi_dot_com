@@ -17,13 +17,14 @@ const SignUp = () => {
             password: "", // 비밀번호
             phoneNumber: "", // 전화번호
             address: "", // 주소
-            isOwner: false // 식당 관계자 여부
+            isOwner: false, // 식당 관계자 여부
+            profileImage: null, // 프로필 이미지
           }}
           onSubmit={(values) => {
             onFormSignUp(values);
           }}
         >
-          {() => (
+          {({setFieldValue}) => (
             <Form className="block md:flex md:justify-evenly">
               <div>
                 <div className="text-center">
@@ -67,9 +68,6 @@ const SignUp = () => {
                     required
                   />
                 </div>
-              </div>
-              <div className="w-0.5 md:mx-2 bg-gray-100" />
-              <div className="md:w-1/3 md:relative">
                 <div className="text-center">
                   <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="phoneNumber" >
                     전화번호
@@ -84,6 +82,9 @@ const SignUp = () => {
                     required
                   />
                 </div>
+              </div>
+              <div className="w-0.5 md:mx-2 bg-gray-100" />
+              <div className="md:w-1/3 md:relative">
                 <div className="text-center">
                   <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="address">
                     주소
@@ -109,6 +110,21 @@ const SignUp = () => {
                       className="border py-2 text-center"
                     />
                   </div>
+                </div>
+                <div className="text-center">
+                  <label className="block pb-2 pt-4 text-sm font-bold" htmlFor="image">
+                    프로필 이미지
+                  </label>
+                  <input
+                    id="image"
+                    name="image"
+                    type="file"
+                    label="프로필 이미지"
+                    className="w-full border py-2 text-center"
+                    onChange={(event) => {
+                      setFieldValue('profileImage', event.currentTarget.files[0]);
+                    }}
+                  />
                 </div>
                 <div className="flex space-x-4 md:inset-x-0 md:bottom-0 md:block md:space-x-0">
                   <button type="submit" className="btn-secondary w-full mt-4">
