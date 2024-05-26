@@ -42,6 +42,8 @@ const useAuth = () => {
       // firestore에 사용자 데이터 저장
       await firebase.addUser(values);
 
+      // TODO: 회원가입 후 로그인 처리
+
       alert("회원가입이 완료되었습니다.");
       navigate("/"); // 메인 페이지로 이동
     } catch(error) {

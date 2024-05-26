@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import firebase from "@/services/firebase/firebase"
 import { useNavigate } from "react-router-dom";
 import clova from "@/services/clova/clova"
+import useGemini from "./useGemini";
 
 const useReview = () => {
   const navigate = useNavigate();
   const [isReviewLoading, setIsReviewLoading] = useState(false);
+  const { generateReply } = useGemini();
 
   /**
    * Firestore에 리뷰 추가
@@ -60,9 +62,43 @@ const useReview = () => {
    */
   const addReply = async (reply) => {
     setIsReviewLoading(true);
-    await firebase.addReply(reply.content, reply.restaurantId, reply.reviewIndex);
-    setIsReviewLoading(false);
-    location.reload(); // 페이지 새로고침 FIXME: 리팩토링 필요
+    try {
+      await firebase.addReply(reply.content, reply.restaurantId, reply.reviewIndex);
+    } catch (e) {
+      return e;
+    } finally {
+      setIsReviewLoading(false);
+    }
+  }
+
+  const generateAllReply = async (restaurant, restaurantId, reviews) => {
+    setIsReviewLoading(true);
+    try {
+      for (let i = 0; i < reviews.length; i++) {
+        // 답글이 없는 리뷰에 대해서만 답글 생성
+        if (!reviews[i].reply) {
+          const reply = {
+            restaurantName: restaurant.name,
+            userName: reviews[i].userName,
+            review: reviews[i].content,
+            eatenMenu: reviews[i].eatenMenu,
+          }
+          
+          // 답글 생성
+          const content = await generateReply(reply);
+
+          // 생성된 답글 추가
+          if (content) {
+            await addReply({ content, restaurantId, reviewIndex: i });
+          }
+        }
+      }
+    } catch (e) {
+      console.error('useReview.generateAllReply: ', e);
+      alert("답글 생성에 실패했습니다.\n다시 시도해주세요.");
+    } finally {
+      setIsReviewLoading(false);
+    }
   }
 
   /**
@@ -74,7 +110,7 @@ const useReview = () => {
     return await clova.sentimentAnalysis(text);
   }
 
-  return { isReviewLoading, addReview, addReply, deleteReview, sentimentAnalysis };
+  return { isReviewLoading, addReview, addReply, deleteReview, generateAllReply, sentimentAnalysis };
 };
 
 export default useReview;

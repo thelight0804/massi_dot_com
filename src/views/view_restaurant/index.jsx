@@ -7,6 +7,7 @@ import Infomation from '@/views/view_restaurant/components/Infomation';
 import Menu from '@/views/view_restaurant/components/Menu';
 import Reviews from '@/views/view_restaurant/components/Reviews';
 import Preloader from '@/components/common/Preloader';
+import ScreenLoader from '@/components/common/ScreenLoader';
 import useReview from '@/hooks/useReview';
 
 const ViewRestaurant = () => {
@@ -14,6 +15,7 @@ const ViewRestaurant = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { getRestaurant, isRestaurantLoading } = useRestaurant(); // useRestaurant 훅 사용
+  const { generateAllReply, isReviewLoading } = useReview(); // useReview 훅 사용
   const [restaurant, setRestaurant] = useState(null); // 식당 정보
   const [isOwner, setIsOwner] = useState(false); // 식당 관계자 여부
   const [isLoading, setIsLoading] = useState(true); // 로딩 여부
@@ -41,12 +43,22 @@ const ViewRestaurant = () => {
     }
   }, [user, restaurant])
 
+  // 탭 클릭 핸들러
   const tabClickHandler = (index) => {
     setActiveIndex(index);
   };
 
-  const onClickHandler = () => {
+  // 답글 달기 버튼 핸들러
+  const onClickReplyHandler = () => {
     navigate(ROUTE.WriteReview.replace(":id", id));
+  }
+
+  // 모든 답글 자동 완성 버튼 핸들러
+  const onClickGenerateAllReplyHandler = () => {
+    if (window.confirm(
+      "해당 기능은 모든 리뷰에 대한 답글을 자동으로 생성합니다. \n작성된 답글이 없는 리뷰에만 생성됩니다. \n계속 진행하시겠습니까?"
+    ))
+      generateAllReply(restaurant, id, restaurant.reviews);
   }
 
   if (isLoading || isRestaurantLoading) {
@@ -106,9 +118,17 @@ const ViewRestaurant = () => {
         ),
         tabCont: (
           <>
+            <p className="text-2xl font-bold m-4">{restaurant.name}</p>
+            {(isOwner && restaurant.reviews) && (
+              <div className='flex justify-end'>
+                <button className='btn-orange' onClick={(onClickGenerateAllReplyHandler)}>
+                  ✨ 모든 답글 자동 완성
+                </button>
+              </div>
+            )}
             {restaurant.reviews ? (
               <div className={(!isOwner && user.uid) ? 'mb-44 md:mb-0' : ''}>
-                <Reviews name={restaurant.name} reviews={restaurant.reviews} restaurantId={id} isOwner={isOwner} uid={user.uid} />
+                <Reviews reviews={restaurant.reviews} restaurantId={id} isOwner={isOwner} uid={user.uid} />
               </div>
             ) : (
               <div className="text-center mt-4 font-re text-gray-700">
@@ -119,7 +139,7 @@ const ViewRestaurant = () => {
             {(!isOwner && user.uid) && (
               <div className='fixed bottom-0 w-full text-center md:text-right bg-white md:bg-transparent'>
                 <div className="h-0.5 bg-gray-300 md:hidden" />
-                <button className="btn-primary m-4 w-4/5 md:w-36" onClick={onClickHandler}>
+                <button className="btn-primary m-4 w-4/5 md:w-36" onClick={onClickReplyHandler}>
                   리뷰 작성
                 </button>
               </div>
@@ -130,6 +150,7 @@ const ViewRestaurant = () => {
     ];
     return (
       <div>
+        {isReviewLoading && <ScreenLoader />}
         <ul className="flex space-x-4 mt-10">
           {tabContArr.map((section) => section.tabTitle)}
         </ul>

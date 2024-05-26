@@ -306,13 +306,11 @@ class Firebase {
           reviews: reviews,
         });
         console.log("Document reply written with ID: ", washingtonRef.id); // 등록된 식당 ID 출력
-        alert("답글이 등록되었습니다.");
       } else {
         console.log("No such document!");
       }
     } catch (e) {
       console.error('Firebase.addReply: ', e);
-      alert("답글 등록에 실패했습니다.\n다시 시도해주세요.");
       return e;
     }
   }

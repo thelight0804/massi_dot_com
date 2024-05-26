@@ -1,6 +1,7 @@
 import react, { useState } from "react";
 import useReview from "@/hooks/useReview";
 import useGemini from "@/hooks/useGemini";
+import ScreenLoader from '@/components/common/ScreenLoader';
 
 const ReplyForm = ({ reviewIndex, restaurantName, restaurantId, userName, content, setModal, eatenMenu }) => {
   const reply = {
@@ -13,13 +14,19 @@ const ReplyForm = ({ reviewIndex, restaurantName, restaurantId, userName, conten
     content: "", // 답글 내용
   };
   const [text, setText] = useState(""); // 답글 내용
-  const { addReply } = useReview();
+  const { addReply, isReviewLoading } = useReview();
   const { generateReply, isGeminiLoading } = useGemini();
 
   // 답글 달기 버튼 클릭 시
-  const onClickSubmitHandler = () => {
+  const onClickSubmitHandler = async () => {
     reply.content = text; // 답글 내용 저장
-    addReply(reply)
+    try {
+      await addReply(reply);
+      alert("답글이 등록되었습니다.");
+      location.reload();
+    } catch (e) {
+      alert("답글 등록에 실패했습니다.\n다시 시도해주세요.");
+    }
   };
 
   // 자동 완성 버튼 클릭 시
@@ -32,6 +39,7 @@ const ReplyForm = ({ reviewIndex, restaurantName, restaurantId, userName, conten
 
   return (
     <div>
+      {isReviewLoading && <ScreenLoader />}
       <textarea
         id="reply"
         rows="4"
