@@ -227,24 +227,50 @@ class Firebase {
    */
   addReview = async (value) => {
     try {
-      // Firestore에 리뷰 데이터 갱신(추가)
+      // 식당 데이터 검색
       const washingtonRef = doc(this.db, "restaurant", value.restaurantId);
       const docSnap = await getDoc(washingtonRef);
 
       if (docSnap.exists()) {
         const restaurant = docSnap.data();
+        // 리뷰 데이터 추가
         const reviews = restaurant.reviews ? [...restaurant.reviews, value] : [value];
+        // Firestore에 리뷰 데이터 갱신(추가)
         await updateDoc(washingtonRef, {
           reviews: reviews,
         });
       } else {
         console.log("No such document!");
       }
-
       console.log("Document review written with ID: ", washingtonRef.id); // 등록된 식당 ID 출력
     } catch (e) {
       console.error('Firebase.setRestaurant: ', e);
       alert("식당 등록에 실패했습니다.\n다시 시도해주세요.");
+    }
+  }
+
+  deleteReview = async (restaurantId, reviewIndex) => {
+    try {
+      // 식당 데이터 검색
+      const washingtonRef = doc(this.db, "restaurant", restaurantId);
+      const docSnap = await getDoc(washingtonRef);
+
+      if (docSnap.exists()) {
+        const restaurant = docSnap.data();
+        const reviews = restaurant.reviews ? [...restaurant.reviews] : [];
+        reviews.splice(reviewIndex, 1); // 해당 인덱스의 리뷰 삭제
+
+        // Firestore에 리뷰 데이터 갱신(삭제)
+        await updateDoc(washingtonRef, {
+          reviews: reviews,
+        });
+        console.log("Document review written with ID: ", washingtonRef.id); // 등록된 식당 ID 출력
+      } else {
+        console.log("No such document!");
+      }
+    } catch (e) {
+      console.error('Firebase.deleteReview: ', e);
+      return e;
     }
   }
 

@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { IconContext } from "react-icons";
 import { FaStar, FaRegUser } from "react-icons/fa";
+import useReview from "@/hooks/useReview";
 import ReplyForm from "./replyForm";
+import ScreenLoader from '@/components/common/ScreenLoader';
 
 const Reviews = ({ name, reviews, isOwner, restaurantId, uid }) => {
   var [reviewIndex, setReviewIndex] = useState(0); // 리뷰 목록의 인덱스
   var [modal, setModal] = useState(false); // 모달 창의 상태
+  const { deleteReview, isReviewLoading: isLoading } = useReview();
 
   // 리뷰 삭제 버튼 헨들러
-  const onClickRemoveHandler = (index) => {
-    console.log("리뷰 삭제 버튼 클릭");
+  const onClickDeleteHandler = (restaurantId, index) => {
+    if (window.confirm("리뷰를 삭제하시겠습니까?"))
+      deleteReview(restaurantId, index);
   }
 
   // 답글 달기 버튼 헨들러
@@ -20,6 +24,7 @@ const Reviews = ({ name, reviews, isOwner, restaurantId, uid }) => {
 
   return (
     <div>
+      {isLoading && <ScreenLoader />}
       <div className="ml-1.5 text-2xl font-bold">{name}</div> {/* 가게 이름 */}
       <div> {/* 리뷰 목록 */}
         {reviews.map((review, index) => ( // map 함수로 reviews 배열을 순회하며 리뷰 목록을 출력
@@ -64,7 +69,7 @@ const Reviews = ({ name, reviews, isOwner, restaurantId, uid }) => {
                 <div>
                   <button
                     className="btn-gray mt-2"
-                    onClick={() => onClickRemoveHandler(index)}
+                    onClick={() => onClickDeleteHandler(restaurantId, index)}
                   >
                     삭제
                   </button>
