@@ -235,7 +235,6 @@ class Firebase {
         const restaurant = docSnap.data();
         // 리뷰 데이터 추가
         const reviews = restaurant.reviews ? [...restaurant.reviews, value] : [value];
-        // Firestore에 리뷰 데이터 갱신(추가)
         await updateDoc(washingtonRef, {
           reviews: reviews,
         });
@@ -273,7 +272,7 @@ class Firebase {
       return e;
     }
   }
-
+  
   addReply = async (content, restaurantId, reviewIndex) => {
     try {
       // Firestore에 리뷰 데이터 갱신(추가)

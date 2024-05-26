@@ -15,8 +15,6 @@ const Reviews = ({ name, reviews, isOwner, restaurantId, uid }) => {
     if (window.confirm("리뷰를 삭제하시겠습니까?"))
       deleteReview(restaurantId, index);
   }
-
-  // 답글 달기 버튼 헨들러
   const onClickReplyHandler = (index) => {
     setReviewIndex(index);
     modal ? setModal(false) : setModal(true);
