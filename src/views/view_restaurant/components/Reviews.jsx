@@ -8,16 +8,24 @@ import ScreenLoader from '@/components/common/ScreenLoader';
 const Reviews = ({ name, reviews, isOwner, restaurantId, uid }) => {
   var [reviewIndex, setReviewIndex] = useState(0); // 리뷰 목록의 인덱스
   var [modal, setModal] = useState(false); // 모달 창의 상태
-  const { deleteReview, isReviewLoading: isLoading } = useReview();
+  const { deleteReview, deleteReply, isReviewLoading: isLoading } = useReview();
 
   // 리뷰 삭제 버튼 헨들러
-  const onClickDeleteHandler = (restaurantId, index) => {
+  const onClickReviewDeleteHandler = (restaurantId, index) => {
     if (window.confirm("리뷰를 삭제하시겠습니까?"))
       deleteReview(restaurantId, index);
   }
+
+  // 답글 달기 버튼 헨들러
   const onClickReplyHandler = (index) => {
     setReviewIndex(index);
     modal ? setModal(false) : setModal(true);
+  }
+
+  // 답글 삭제 버튼 헨들러
+  const onClickDeleteHandler = (restaurantId, index) => {
+    if (window.confirm("답글을 삭제하시겠습니까?"))
+      deleteReply(restaurantId, index);
   }
 
   return (
@@ -65,13 +73,13 @@ const Reviews = ({ name, reviews, isOwner, restaurantId, uid }) => {
               <div>
                 <button
                   className="btn-gray mt-2"
-                  onClick={() => onClickDeleteHandler(restaurantId, index)}
+                  onClick={() => onClickReviewDeleteHandler(restaurantId, index)}
                 >
                   삭제
                 </button>
               </div>
             )}
-            {isOwner && (
+            {(isOwner && !review.reply) && (
               <div className="flex justify-end">
                 <button
                   className="btn-primary text-sm px-2 py-2"
@@ -99,6 +107,16 @@ const Reviews = ({ name, reviews, isOwner, restaurantId, uid }) => {
             <div className="rounded-lg bg-orange-100 p-4 ml-8 mr-4 text-sm">
               <p className="font-bold">사장님</p>
               <p>{review.reply}</p>
+              {isOwner && ( // 답글 삭제 버튼 출력
+                <div className="flex justify-end">
+                  <button
+                    className="btn-gray mt-2"
+                    onClick={() => onClickDeleteHandler(restaurantId, index)}
+                  >
+                    삭제
+                  </button>
+                </div>
+              )}
             </div>
           )}
           <div className="h-0.5 m-4 bg-gray-100" />

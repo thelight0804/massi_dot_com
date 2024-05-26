@@ -315,6 +315,31 @@ class Firebase {
     }
   }
 
+  deleteReply = async (restaurantId, reviewIndex) => {
+    try {
+      // 식당 데이터 검색
+      const washingtonRef = doc(this.db, "restaurant", restaurantId);
+      const docSnap = await getDoc(washingtonRef);
+
+      if (docSnap.exists()) {
+        const restaurant = docSnap.data();
+        const reviews = restaurant.reviews ? [...restaurant.reviews] : [];
+        reviews[reviewIndex].reply = null;
+
+        // Firestore에 답글 데이터 갱신(삭제)
+        await updateDoc(washingtonRef, {
+          reviews: reviews,
+        });
+        console.log("Document reply written with ID: ", washingtonRef.id); // 등록된 식당 ID 출력
+      } else {
+        console.log("No such document!");
+      }
+    } catch (e) {
+      console.error('Firebase.deleteReply: ', e);
+      return e;
+    }
+  }
+
   // Storage Actions --------------
 
   /**

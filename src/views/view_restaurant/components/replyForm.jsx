@@ -19,6 +19,10 @@ const ReplyForm = ({ reviewIndex, restaurantName, restaurantId, userName, conten
 
   // 답글 달기 버튼 클릭 시
   const onClickSubmitHandler = async () => {
+    if (!text) {
+      alert("답글을 입력해주세요.");
+      return;
+    }
     reply.content = text; // 답글 내용 저장
     try {
       await addReply(reply);

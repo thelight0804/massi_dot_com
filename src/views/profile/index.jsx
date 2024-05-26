@@ -23,9 +23,9 @@ const Profile = () => {
 
   return (
     <div>
-      <h1 className="m-4 flex justify-center text-2xl font-bold ">MyPage</h1>
+      <h1 className="m-4 text-2xl font-bold text-center">MyPage</h1>
       <div className="md:flex md:items-center md:justify-evenly">
-        <div className="relative h-32 bg-red-100">
+        <div className="relative h-32 bg-red-100 md:static">
           {user.profileImage ? (
             <img
               className="absolute left-1/2 top-1/2 -translate-x-1/2 md:left-0 md:top-0 md:translate-x-0 h-32 w-32 rounded-full"
@@ -33,7 +33,7 @@ const Profile = () => {
               alt="프로필 사진"
             />
           ) : (
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 md:left-0 md:top-0 md:translate-x-0">
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2">
               <IconContext.Provider value={{ color: "#fca5a5" }}>
                 <FaRegUser className="h-32 w-32 rounded-full" />
               </IconContext.Provider>

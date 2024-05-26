@@ -18,6 +18,7 @@ const useReview = () => {
     setIsReviewLoading(true);
     try {
       // 리뷰 이미지 저장
+      // FIXME: 이미지 저장 시, 이미지가 단순 파일로 저장 됌
       if (review.image) {
         const foodImageUrl = await firebase.storeImage(review.image, `restaurants/${review.restaurantId}/reivew/food`);
         review.image = foodImageUrl;
@@ -42,6 +43,12 @@ const useReview = () => {
     }
   }
 
+  /**
+   * 리뷰 삭제
+   * @param {String} restaurantId 식당 문서 ID
+   * @param {String} reviewIndex 리뷰 인덱스
+   * @returns 
+   */
   const deleteReview = async (restaurantId, reviewIndex) => {
     setIsReviewLoading(true);
     try {
@@ -71,6 +78,26 @@ const useReview = () => {
     }
   }
 
+  const deleteReply = async (restaurantId, reviewIndex) => {
+    setIsReviewLoading(true);
+    try {
+      await firebase.deleteReply(restaurantId, reviewIndex);
+      alert("답글이 삭제되었습니다.");
+      location.reload();
+    } catch (e) {
+      alert("답글 삭제에 실패했습니다.\n다시 시도해주세요.");
+      return e;
+    } finally {
+      setIsReviewLoading(false);
+    }
+  }
+
+  /**
+   * 모든 리뷰에 대해 답글 자동 생성
+   * @param {Object} restaurant 식당 데이터
+   * @param {String} restaurantId 식당 문서 ID
+   * @param {Object} reviews 리뷰 데이터
+   */
   const generateAllReply = async (restaurant, restaurantId, reviews) => {
     setIsReviewLoading(true);
     try {
@@ -93,6 +120,7 @@ const useReview = () => {
           }
         }
       }
+      location.reload();
     } catch (e) {
       console.error('useReview.generateAllReply: ', e);
       alert("답글 생성에 실패했습니다.\n다시 시도해주세요.");
@@ -110,7 +138,7 @@ const useReview = () => {
     return await clova.sentimentAnalysis(text);
   }
 
-  return { isReviewLoading, addReview, addReply, deleteReview, generateAllReply, sentimentAnalysis };
+  return { isReviewLoading, addReview, addReply, deleteReview, deleteReply, generateAllReply, sentimentAnalysis };
 };
 
 export default useReview;

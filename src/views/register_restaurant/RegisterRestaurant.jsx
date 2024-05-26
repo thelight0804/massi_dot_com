@@ -31,6 +31,7 @@ const RegisterRestaurant = () => {
               closeTime: "", // 마감 시간
               phoneNumber: "", // 전화번호
               closedDay: "", // 휴무일
+              // FIXME: closedDay 데이터가 저장되지 않음
             },
           }}
           onSubmit={(values) => {
