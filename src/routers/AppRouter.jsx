@@ -17,6 +17,7 @@ const AppRouter = () => {
           <Route path={ROUTES.SignUp} element={<view.SignUp />} />
           <Route path={ROUTES.SignIn} element={<view.SignIn />} />
           <Route path={ROUTES.Profile} element={<view.Profile />} />
+          <Route path={ROUTES.ProfileEdit} element={<view.ProfileEdit />} />
           <Route path={ROUTES.ViewRestaurant} element={<view.ViewRestaurant />} />
           <Route path={ROUTES.RegisterRestaurant} element={<view.RegisterRestaurant />} />
           <Route path={ROUTES.RegisterMenu} element={<view.RegisterMenu />} />
