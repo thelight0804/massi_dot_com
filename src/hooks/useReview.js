@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import firebase from "@/services/firebase/firebase"
 import { useNavigate } from "react-router-dom";
-import firebase from "@/services/firebase/firebase"
 import clova from "@/services/clova/clova"
 
 const useReview = () => {
