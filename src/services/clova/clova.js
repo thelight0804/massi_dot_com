@@ -16,12 +16,15 @@ class Clova {
     await axios.post(
       "https://naveropenapi.apigw.ntruss.com/sentiment-analysis/v1/analyze",
       text,
-      {
-        headers: this.headers,
-      },
+      { headers: this.headers }
+    ).then((response) => {
+      console.log(response.data);
+      return response.data;
+    }).catch((error) => {
+      console.log(error);
+    }
     );
   }
-
 }
 
 const clovaInstance = new Clova();

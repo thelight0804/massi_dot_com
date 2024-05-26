@@ -3,10 +3,16 @@ import { IconContext } from "react-icons";
 import { FaStar, FaRegUser } from "react-icons/fa";
 import ReplyForm from "./replyForm";
 
-const Reviews = ({ name, reviews, isOwner, restaurantId }) => {
+const Reviews = ({ name, reviews, isOwner, restaurantId, uid }) => {
   var [reviewIndex, setReviewIndex] = useState(0); // 리뷰 목록의 인덱스
   var [modal, setModal] = useState(false); // 모달 창의 상태
 
+  // 리뷰 삭제 버튼 헨들러
+  const onClickRemoveHandler = (index) => {
+    console.log("리뷰 삭제 버튼 클릭");
+  }
+
+  // 답글 달기 버튼 헨들러
   const onClickReplyHandler = (index) => {
     setReviewIndex(index);
     modal ? setModal(false) : setModal(true);
@@ -54,6 +60,16 @@ const Reviews = ({ name, reviews, isOwner, restaurantId }) => {
                 </div>
                 )
               }
+              {review.uid === uid && (
+                <div>
+                  <button
+                    className="btn-gray mt-2"
+                    onClick={() => onClickRemoveHandler(index)}
+                  >
+                    삭제
+                  </button>
+                </div>
+              )}
               {isOwner && (
                 <div className="flex justify-end">
                   <button

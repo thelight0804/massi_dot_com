@@ -108,7 +108,7 @@ const ViewRestaurant = () => {
           <>
             {restaurant.reviews ? (
               <div className={(!isOwner && user.uid) ? 'mb-44 md:mb-0' : ''}>
-                <Reviews name={restaurant.name} reviews={restaurant.reviews} restaurantId={id} isOwner={isOwner} />
+                <Reviews name={restaurant.name} reviews={restaurant.reviews} restaurantId={id} isOwner={isOwner} uid={user.uid} />
               </div>
             ) : (
               <div className="text-center mt-4 font-re text-gray-700">

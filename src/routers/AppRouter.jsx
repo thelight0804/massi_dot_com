@@ -4,15 +4,9 @@ import Navigation from '@/components/common/Navigation';
 import * as ROUTES from '@/constants/routes'; // 모든 routes 경로
 import * as view from '@/views'; // 모든 views 경로
 import { useAuth } from '@/hooks';
-import useReview from '../hooks/useReview';
 
 const AppRouter = () => {
   useAuth();
-
-  const { sentimentAnalysis } = useReview();
-  useEffect(() => {
-    sentimentAnalysis("안녕하세요. 오늘 날씨가 좋네요.");
-  }, []);
 
   return (
     <>
