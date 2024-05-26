@@ -1,5 +1,5 @@
 export const HOME = '/';
-export const MyPage = '/mypage';
+export const Profile = '/profile';
 export const SignUp = "/signUp";
 export const SignIn = "/signIn";
 export const ViewRestaurant = '/restaurant/:id';

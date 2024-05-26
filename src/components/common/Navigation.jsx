@@ -47,7 +47,7 @@ const Navigation = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink className="btn-link" to={ROUTE.MyPage}>
+                <NavLink className="btn-link" to={ROUTE.Profile}>
                   마이 페이지
                 </NavLink>
               </li>
