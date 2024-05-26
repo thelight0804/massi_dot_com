@@ -22,26 +22,26 @@ Palette:
 @layer components {
   /* 강조 버튼 */
   .btn-primary {
-    @apply text-sm rounded-md bg-red-500 px-2 py-4 text-white hover:bg-red-300 md:text-base md:px-4 md:py-4;
+    @apply text-sm rounded-md bg-red-500 px-2 py-4 text-white hover:bg-red-300 md:text-base;
   }
 
   /* 보조 버튼 */
   .btn-secondary {
-    @apply w-fit text-sm rounded bg-red-300 px-2 py-2 font-bold text-white hover:bg-red-500 md:text-base md:px-4 md:py-4;
+    @apply w-fit text-sm rounded bg-red-300 px-2 py-2 font-bold text-white hover:bg-red-500 md:text-base;
   }
 
   /* 회색 버튼 */
   .btn-gray {
-    @apply w-fit text-sm rounded bg-gray-300 px-2 py-2 font-bold text-white hover:bg-gray-500 md:text-base md:px-4 md:py-4;
+    @apply w-fit text-sm rounded bg-gray-300 px-2 py-2 font-bold text-white hover:bg-gray-500 md:text-base;
   }
 
   /* 주황색 버튼 */
   .btn-orange {
-    @apply w-fit text-sm rounded bg-orange-300 px-2 py-2 font-bold text-white hover:bg-orange-500 md:text-base md:px-4 md:py-4;
+    @apply w-fit text-sm rounded bg-orange-300 px-2 py-2 font-bold text-white hover:bg-orange-500 md:text-base;
   }
 
   /* 링크 버튼 */
   .btn-link {
-    @apply text-sm rounded-md px-2 py-4 bg-gray-50 border border-gray-200 hover:bg-inherit md:text-base md:px-4 md:py-4;
+    @apply text-sm rounded-md px-2 py-4 bg-gray-50 border border-gray-200 hover:bg-inherit md:text-base;
   }
 }
