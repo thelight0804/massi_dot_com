@@ -89,10 +89,10 @@ const WriteReview = () => {
                     max={new Date().toISOString().split('T')[0]} // 현재 날짜
                     min={'1999-01-01'}
                     className="w-full border py-2 text-center"
+                    required
                     onChange={(event) => {
                       setFieldValue('date', event.currentTarget.value);
                     }}
-                  // required
                   />
                 </div>
                 <div className="text-center">
@@ -105,7 +105,6 @@ const WriteReview = () => {
                     label="별점"
                     min={1} // 최소값
                     max={5} // 최대값
-                    // required
                     className="w-full border py-2 text-center"
                   />
                 </div>

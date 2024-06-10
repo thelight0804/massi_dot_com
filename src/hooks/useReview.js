@@ -18,16 +18,9 @@ const useReview = () => {
     setIsReviewLoading(true);
     try {
       // 리뷰 이미지 저장
-      // FIXME: 이미지 저장 시, 이미지가 단순 파일로 저장 됌
       if (review.image) {
         const foodImageUrl = await firebase.storeImage(review.image, `restaurants/${review.restaurantId}/reivew/food`);
         review.image = foodImageUrl;
-      }
-
-      // 사용자 프로필 이미지 저장
-      if (review.profileImage) {
-        const profileImageUrl = await firebase.storeImage(review.profileImage, `restaurants/${review.restaurantId}/review/profile`);
-        review.profileImage = profileImageUrl;
       }
 
       // 리뷰 데이터 Firestore에 추가

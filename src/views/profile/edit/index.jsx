@@ -129,9 +129,6 @@ const ProfileEdit = () => {
                   />
                 </div>
                 <div className="block md:inset-x-0 md:bottom-0 md:flex md:space-x-4">
-                  <button type="submit" className="btn-secondary w-full mt-4">
-                    수정
-                  </button>
                   <button
                     type="button"
                     className="btn-gray w-full mt-4"
@@ -140,6 +137,9 @@ const ProfileEdit = () => {
                     }}
                   >
                     이전
+                  </button>
+                  <button type="submit" className="btn-secondary w-full mt-4">
+                    수정
                   </button>
                 </div>
               </div>
