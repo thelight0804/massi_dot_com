@@ -1,4 +1,4 @@
-import react, { useState } from "react";
+import react, { useEffect, useState } from "react";
 import useReview from "@/hooks/useReview";
 import useGemini from "@/hooks/useGemini";
 import ScreenLoader from '@/components/common/ScreenLoader';
@@ -16,6 +16,10 @@ const ReplyForm = ({ reviewIndex, restaurantName, restaurantId, userName, conten
   const [text, setText] = useState(""); // 답글 내용
   const { addReply, isReviewLoading } = useReview();
   const { generateReply, isGeminiLoading } = useGemini();
+
+  useEffect(() => {
+    alert("현재 Firebase 쓰기 권한이 막혀있어, 답글 작성 기능 및 자동 완성 기능을 사용할 수 없습니다. 사용하기 위해서는 thelight0804@gmail.com으로 문의해주세요.\nWrite reply and AI generate is currently disabled due to Firebase write permission restrictions. Please contact 'thelight0804@gmail.com'")
+  }, [])
 
   // 답글 달기 버튼 클릭 시
   const onClickSubmitHandler = async () => {
@@ -58,13 +62,15 @@ const ReplyForm = ({ reviewIndex, restaurantName, restaurantId, userName, conten
       <div className="md:flex md:justify-end md:space-x-4">
         <button
           className="block btn-secondary text-sm px-2 py-2 mt-2 w-full md:w-24"
-          onClick={onClickSubmitHandler}
+          onClick={() => {alert("현재 Firebase 쓰기 권한이 막혀있어, 답글 작성 기능 및 자동 완성 기능을 사용할 수 없습니다. 사용하기 위해서는 thelight0804@gmail.com으로 문의해주세요.\nWrite reply and AI generate is currently disabled due to Firebase write permission restrictions. Please contact 'thelight0804@gmail.com'")}}
+          // onClick={onClickSubmitHandler}
         >
           답글 달기
         </button>
         <button
           className="block btn-orange text-sm px-2 py-2 mt-2 w-full md:w-24"
-          onClick={onClickGenerateHandler}
+          onClick={() => {alert("현재 Firebase 쓰기 권한이 막혀있어, 답글 작성 기능 및 자동 완성 기능을 사용할 수 없습니다. 사용하기 위해서는 thelight0804@gmail.com으로 문의해주세요.\nWrite reply and AI generate is currently disabled due to Firebase write permission restrictions. Please contact 'thelight0804@gmail.com'")}}
+          // onClick={onClickGenerateHandler}
         >
          ✨ 자동 완성
         </button>

@@ -13,6 +13,10 @@ const ProfileEdit = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    alert("현재 Firebase 쓰기 권한이 막혀있어, 프로필 수정 기능을 사용할 수 없습니다. 사용하기 위해서는 thelight0804@gmail.com으로 문의해주세요.\nProfile edit is currently disabled due to Firebase write permission restrictions. Please contact 'thelight0804@gmail.com'")
+  }, [])
+
+  useEffect(() => {
     if (user.uid !== location.state.uid) {
       alert('비정상적인 접근입니다. 이전 페이지로 이동합니다.');
       navigate(-1);
@@ -36,7 +40,8 @@ const ProfileEdit = () => {
             profileImage: user.profileImage, // 프로필 이미지
           }}
           onSubmit={(values) => {
-            profileUpdate(values);
+            alert("현재 Firebase 쓰기 권한이 막혀있어, 프로필 수정 기능을 사용할 수 없습니다. 사용하기 위해서는 thelight0804@gmail.com으로 문의해주세요.\nProfile edit is currently disabled due to Firebase write permission restrictions. Please contact 'thelight0804@gmail.com'")
+            // profileUpdate(values); // FIX: 프로필 수정 비활성화
           }}
         >
           {({setFieldValue}) => (

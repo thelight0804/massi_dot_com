@@ -10,6 +10,10 @@ const RegisterRestaurant = () => {
   const user = useSelector((state) => state.user); // Redux store에서 user 정보 가져오기
 
   useEffect(() => {
+    alert("현재 Firebase 쓰기 권한이 막혀있어, 식당 추가 기능을 사용할 수 없습니다. 사용하기 위해서는 thelight0804@gmail.com으로 문의해주세요.\nRegister restaurant is currently disabled due to Firebase write permission restrictions. Please contact 'thelight0804@gmail.com'")
+  }, [])
+
+  useEffect(() => {
     if (!user.uid) {
       alert('비정상적인 접근입니다. 이전 페이지로 이동합니다.');
       navigate(-1); // 이전 페이지로 이동
@@ -31,12 +35,12 @@ const RegisterRestaurant = () => {
               closeTime: "", // 마감 시간
               phoneNumber: "", // 전화번호
               closedDay: "", // 휴무일
-              // FIXME: closedDay 데이터가 저장되지 않음
             },
           }}
           onSubmit={(values) => {
+            alert("현재 Firebase 쓰기 권한이 막혀있어, 식당 추가 기능을 사용할 수 없습니다. 사용하기 위해서는 thelight0804@gmail.com으로 문의해주세요.\nRegister restaurant is currently disabled due to Firebase write permission restrictions. Please contact 'thelight0804@gmail.com'")
             // RegisterMenu 페이지로 이동
-            navigate(ROUTE.RegisterMenu, { state: { restaurantInfo: values } });
+            // navigate(ROUTE.RegisterMenu, { state: { restaurantInfo: values } }); // FIX: 식당 추가 비활성화
           }}
         >
           {({setFieldValue}) => (

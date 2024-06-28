@@ -17,6 +17,10 @@ const WriteReview = () => {
   const [menus, setMenus] = useState([]); // 식당 메뉴
 
   useEffect(() => {
+    alert("현재 Firebase 쓰기 권한이 막혀있어, 리뷰 작성 기능을 사용할 수 없습니다. 사용하기 위해서는 thelight0804@gmail.com으로 문의해주세요.\nWrite review is currently disabled due to Firebase write permission restrictions. Please contact 'thelight0804@gmail.com'")
+  }, [])
+
+  useEffect(() => {
     if (!user.uid) {
       alert('비정상적인 접근입니다. 이전 페이지로 이동합니다.');
       navigate(-1); // 이전 페이지로 이동
@@ -54,7 +58,9 @@ const WriteReview = () => {
             values.userName = user.name; // 사용자 이름 추가
             values.restaurantId = id; // 식당 고유 ID 추가
             values.uid = user.uid; // 사용자 고유 ID 추가
-            addReview(values); // 리뷰 등록
+
+            alert("현재 Firebase 쓰기 권한이 막혀있어, 리뷰 작성 기능을 사용할 수 없습니다. 사용하기 위해서는 thelight0804@gmail.com으로 문의해주세요.\nWrite review is currently disabled due to Firebase write permission restrictions. Please contact 'thelight0804@gmail.com'")
+            // addReview(values); // 리뷰 등록 // FIX: 리뷰 작성 비활성화
           }}
         >
           {({ setFieldValue }) => (

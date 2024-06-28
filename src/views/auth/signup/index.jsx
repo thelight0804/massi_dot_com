@@ -1,9 +1,14 @@
 import { Field, Form, Formik } from 'formik';
 import { useAuth } from '@/hooks';
 import ScreenLoader from '@/components/common/ScreenLoader';
+import { useEffect } from 'react';
 
 const SignUp = () => {
-  const { onFormSignUp, isAuthLoading: isLoading} = useAuth();
+  const { onFormSignUp, isAuthLoading: isLoading } = useAuth();
+  
+  useEffect(() => {
+    alert("현재 Firebase 쓰기 권한이 막혀있어, 회원가입 기능을 사용할 수 없습니다. 사용하기 위해서는 thelight0804@gmail.com으로 문의해주세요.\nSignup is currently disabled due to Firebase write permission restrictions. Please contact 'thelight0804@gmail.com'")
+  }, [])
 
   return (
     <div className="m-4 mx-auto md:w-4/5">
@@ -21,7 +26,8 @@ const SignUp = () => {
             profileImage: null, // 프로필 이미지
           }}
           onSubmit={(values) => {
-            onFormSignUp(values);
+            alert("현재 Firebase 쓰기 권한이 막혀있어, 회원가입 기능을 사용할 수 없습니다. thelight0804@gmail.com으로 문의해주세요.\nSignup is currently disabled due to Firebase write permission restrictions. Please contact 'thelight0804@gmail.com'")
+            // onFormSignUp(values); // FIX: 회원가입 비활성화
           }}
         >
           {({setFieldValue}) => (

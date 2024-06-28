@@ -121,7 +121,10 @@ const ViewRestaurant = () => {
             <p className="text-2xl font-bold m-4">{restaurant.name}</p>
             {(isOwner && restaurant.reviews) && (
               <div className='flex justify-end'>
-                <button className='btn-orange' onClick={(onClickGenerateAllReplyHandler)}>
+                <button
+                  className='btn-orange'
+                  onClick={() => {alert("현재 Firebase 쓰기 권한이 막혀있어, 모든 답글 자동 완성 기능을 사용할 수 없습니다. 사용하기 위해서는 thelight0804@gmail.com으로 문의해주세요.\nAI generate is currently disabled due to Firebase write permission restrictions. Please contact 'thelight0804@gmail.com'")}}>
+                  {/* onClick={(onClickGenerateAllReplyHandler)}> */}
                   ✨ 모든 답글 자동 완성
                 </button>
               </div>

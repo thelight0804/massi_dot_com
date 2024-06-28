@@ -12,8 +12,9 @@ const Reviews = ({ name, reviews, isOwner, restaurantId, uid }) => {
 
   // 리뷰 삭제 버튼 헨들러
   const onClickReviewDeleteHandler = (restaurantId, index) => {
-    if (window.confirm("리뷰를 삭제하시겠습니까?"))
-      deleteReview(restaurantId, index);
+    alert("현재 Firebase 쓰기 권한이 막혀있어, 삭제 기능을 사용할 수 없습니다. 사용하기 위해서는 thelight0804@gmail.com으로 문의해주세요.\nDelete review is currently disabled due to Firebase write permission restrictions. Please contact 'thelight0804@gmail.com'")
+    // if (window.confirm("리뷰를 삭제하시겠습니까?"))
+    //   deleteReview(restaurantId, index);
   }
 
   // 답글 달기 버튼 헨들러
@@ -24,8 +25,9 @@ const Reviews = ({ name, reviews, isOwner, restaurantId, uid }) => {
 
   // 답글 삭제 버튼 헨들러
   const onClickDeleteHandler = (restaurantId, index) => {
-    if (window.confirm("답글을 삭제하시겠습니까?"))
-      deleteReply(restaurantId, index);
+    alert("현재 Firebase 쓰기 권한이 막혀있어, 삭제 기능을 사용할 수 없습니다. 사용하기 위해서는 thelight0804@gmail.com으로 문의해주세요.\nDelete reply is currently disabled due to Firebase write permission restrictions. Please contact 'thelight0804@gmail.com'")
+    // if (window.confirm("답글을 삭제하시겠습니까?"))
+    //   deleteReply(restaurantId, index);
   }
 
   return (
