@@ -14,7 +14,8 @@
 
 ## ⚠️ 注意！
 ```
-⛔ Firebase攻撃による課金を防ぐために、読み取り権限を制限しました。すべてのサービスを利用するには'thelight0804@gmail.com'までお問い合わせください。
+⛔ Firebase攻撃による課金を防ぐために、読み取り権限を制限しました。
+すべてのサービスを利用するには'thelight0804@gmail.com'までお問い合わせください。
 ```
 ```
 ⛔ To prevent charges due to Firebase attacks, we have restricted read permissions.
