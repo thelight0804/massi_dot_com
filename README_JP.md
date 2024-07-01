@@ -23,7 +23,8 @@ If you wish to use all services, please contact ‘thelight0804@gmail.com’
 ```
 
 ## 🖥️ アーキテクチャ
-![Massi architecture](https://github.com/thelight0804/massi_dot_com/assets/69424845/fe2fa08c-af65-43c3-8d3e-5d1a54226556)
+![Massi architecture](https://github.com/thelight0804/massi_dot_com/assets/69424845/f7cca078-7504-42a3-9354-dad2bd68e12f)
+
 
 ## 🛠️ 技術スタック
 ### Firebase
