@@ -1,4 +1,6 @@
 # 맛있닷컴 (Massi.com)
+> <a href="https://github.com/thelight0804/massi_dot_com/blob/main/README_JP.md">日本語はこちらをご覧ください。</a>
+<br/>
 
 <a href="https://massi-bc09a.web.app/">웹 사이트</a>
 <a href="https://www.notion.so/thelight0804/efa335fc387642cbb42033ac126f0fba" target="Notion">
